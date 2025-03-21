@@ -9,5 +9,21 @@ class AppAssets {
   String appLogo = "$staticAssets/app_logo.png";
   String linkedin = "$iconsAssets/linkedin.png";
   String X = "$iconsAssets/X.png";
+
+  ///
+  ///     drawer icons
+  ///
+  String concessions = "$iconsAssets/consessions.png";
+  String fan = "$iconsAssets/fan.png";
+  String home = "$iconsAssets/home.png";
+  String info_stadium = "$iconsAssets/info.png";
+  String merchandise = "$iconsAssets/merchandise.png";
+  String mls = "$iconsAssets/mls.png";
+  String notification = "$iconsAssets/notification.png";
+  String parking = "$iconsAssets/parking.png";
+  String schedule = "$iconsAssets/schedual.png";
+  String scrollView = "$iconsAssets/scrollView.png";
+  String team = "$iconsAssets/team.png";
+  String ticket = "$iconsAssets/Ticket.png";
   String profilePic = "$staticAssets/profilePic.png";
 }
