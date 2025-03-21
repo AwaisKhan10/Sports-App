@@ -6,5 +6,8 @@ class AppAssets {
   ///
   /// App logo
   ///
-  static String appLogo = "$staticAssets/app_logo.png";
+  String appLogo = "$staticAssets/app_logo.png";
+  String linkedin = "$iconsAssets/linkedin.png";
+  String X = "$iconsAssets/X.png";
+  String profilePic = "$staticAssets/profilePic.png";
 }
