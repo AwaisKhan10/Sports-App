@@ -6,7 +6,8 @@ import 'package:sports_app/core/constant/text_style.dart';
 class CustomHeader extends StatelessWidget {
   final String title;
   final IconData? icon;
-  const CustomHeader({super.key, required this.title, this.icon});
+  final VoidCallback? onTap;
+  const CustomHeader({super.key, required this.title, this.icon, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,14 @@ class CustomHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon),
+          GestureDetector(
+            onTap: () {
+              if (onTap != null) {
+                onTap!(); // ✅ Correctly calling the function
+              }
+            },
+            child: Icon(icon),
+          ),
           Text(
             title,
             style: style20B.copyWith(color: blackColor, fontSize: 22.sp),

@@ -5,6 +5,7 @@ import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:sports_app/ui/auth/register/register_screen.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
+import 'package:sports_app/ui/screens/%20%20scroll_view/%20%20scroll_view_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
 import 'package:sports_app/ui/screens/profile/profile_screen.dart';
 

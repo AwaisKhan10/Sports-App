@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/auth_field_decoration.dart';
@@ -34,6 +36,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CustomHeader(
                     title: 'My Profile',
                     icon: Icons.arrow_back_rounded,
+                    onTap: () {
+                      navigator!.pop(context);
+                    },
                   ),
                   CustomDropDownExpendableButton(
                     text:

@@ -18,8 +18,11 @@ class DrawerScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: scaffoldColor,
             appBar: AppBar(
-              toolbarHeight: 100.h,
-              title: Text("Scroll view ", style: style20B),
+              // toolbarHeight: 100.h,
+              title: Text(
+                "change it according to taped screen",
+                style: style20B,
+              ),
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
             ),

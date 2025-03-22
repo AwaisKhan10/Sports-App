@@ -59,6 +59,7 @@ class CustomRegisterButton extends StatefulWidget {
   final String? imageUrl;
   final Color firstTextColor;
   final Color secondTextColor;
+  final VoidCallback? onPressed; // Callback function
 
   CustomRegisterButton({
     required this.firstColor,
@@ -67,6 +68,7 @@ class CustomRegisterButton extends StatefulWidget {
     this.imageUrl,
     required this.firstTextColor,
     required this.secondTextColor,
+    this.onPressed, // Call the function when button is pressed
   });
 
   @override
@@ -83,6 +85,10 @@ class _CustomRegisterButtonState extends State<CustomRegisterButton> {
         setState(() {
           isSelected = !isSelected;
         });
+
+        if (widget.onPressed != null) {
+          widget.onPressed!(); // Call the function properly
+        }
       },
       child: Container(
         height: 56.h,

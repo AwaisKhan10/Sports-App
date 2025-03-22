@@ -39,6 +39,10 @@ class DrawerScreenViewModel extends ChangeNotifier {
 
   void updateIndex(int index) {
     _selectedIndex = index;
+    print(
+      'print('
+      ');',
+    );
     notifyListeners(); // Notify UI of the change
   }
 }

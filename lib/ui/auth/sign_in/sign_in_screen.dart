@@ -2,13 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/auth_field_decoration.dart';
 import 'package:sports_app/core/constant/colors.dart';
 
 import 'package:sports_app/core/constant/text_style.dart';
+import 'package:sports_app/ui/auth/register/register_screen.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_view_model.dart';
+import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
+import 'package:sports_app/ui/screens/home/home_screen.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/header.dart';
 import 'package:sports_app/widget/line_withText.dart';
@@ -82,6 +87,9 @@ class SignInScreen extends StatelessWidget {
           ),
           30.verticalSpace,
           CustomRegisterButton(
+            onPressed: () {
+              Get.to(() => DrawerScreen()); // ✅ Now it will navigate
+            },
             firstColor: lightRedColor,
             secondColor: primaryColor,
             title: 'Sign In with Email',
@@ -96,9 +104,15 @@ class SignInScreen extends StatelessWidget {
                 style: style16.copyWith(fontWeight: FontWeight.w400),
               ),
               3.horizontalSpace,
-              Text(
-                'Create one now ',
-                style: style16.copyWith(fontWeight: FontWeight.w600),
+              GestureDetector(
+                onTap: () {
+                  Get.to(RegisterScreen());
+                  print('Screen name $RegisterScreen');
+                },
+                child: Text(
+                  'Create one now ',
+                  style: style16.copyWith(fontWeight: FontWeight.w600),
+                ),
               ),
             ],
           ),
