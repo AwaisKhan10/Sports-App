@@ -27,4 +27,15 @@ class AppAssets {
   String team = "$iconsAssets/team.png";
   String ticket = "$iconsAssets/Ticket.png";
   String profilePic = "$staticAssets/profilePic.png";
+  String tickText = "$staticAssets/tickText.png";
+  String seatingGround = "$staticAssets/seatingGround.png";
+  String groundInfo = "$staticAssets/groundInfo.png";
+  String parkingDiagram = "$staticAssets/parkingDiagram.png";
+  String map = "$staticAssets/map.png";
+
+  //*************************      Ticketing screens       ********************************/
+  String contact = "$iconsAssets/contact.png";
+  String tickets = "$iconsAssets/tickets.png";
+  String seats = "$iconsAssets/seat.png";
+  String purchase = "$iconsAssets/Purchase.png";
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/auth_field_decoration.dart';
@@ -36,9 +35,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CustomHeader(
                     title: 'My Profile',
                     icon: Icons.arrow_back_rounded,
-                    onTap: () {
-                      navigator!.pop(context);
-                    },
                   ),
                   CustomDropDownExpendableButton(
                     text:
@@ -102,10 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: style16.copyWith(fontWeight: FontWeight.w400),
               ),
               CustomSwitchButton(
-                initialValue: true, // Default state
                 onChanged: (bool value) {
                   print("Switch is now: $value");
                 },
+                initialValue: false,
               ),
             ],
           ),

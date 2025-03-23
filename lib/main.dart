@@ -1,13 +1,14 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-
-import 'package:get/get.dart';
-import 'package:sports_app/ui/auth/register/register_screen.dart';
-import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
-import 'package:sports_app/ui/screens/%20%20scroll_view/%20%20scroll_view_screen.dart';
+import 'package:sports_app/ui/screens/%20%20ticketing/%20%20ticketing_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
-import 'package:sports_app/ui/screens/profile/profile_screen.dart';
+import 'package:sports_app/ui/screens/parking/getting_help.dart';
+import 'package:sports_app/ui/screens/parking/parking_diagram.dart';
+import 'package:sports_app/ui/screens/parking/parking_screen.dart';
+import 'package:sports_app/ui/screens/parking/parking_tips.dart';
+import 'package:sports_app/ui/screens/purchase_ticket/purchase_ticket_screen.dart';
+import 'package:sports_app/ui/screens/seating_diagram.dart/seating_diagram.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();

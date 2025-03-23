@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
+import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_view_model.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -18,7 +21,8 @@ class DrawerScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: scaffoldColor,
             appBar: AppBar(
-              // toolbarHeight: 100.h,
+              toolbarHeight: 70.h,
+              centerTitle: true,
               title: Text(
                 "change it according to taped screen",
                 style: style20B,
@@ -71,7 +75,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // Login action
+                      Get.to(SignInScreen());
                     },
                     child: Text("Login", style: TextStyle(color: Colors.white)),
                   ),
