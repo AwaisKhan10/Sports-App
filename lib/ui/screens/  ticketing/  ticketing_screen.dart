@@ -37,13 +37,14 @@ class TicketingScreen extends StatelessWidget {
                       spacing: 20.w,
                       runSpacing: 20.h,
                       children: [
-                        GestureDetector(
-                          child: CustomTicketCard(
-                            ticketObject: TicketScreenModel(
-                              imageUrl: AppAssets().purchase,
-                              title: 'Purchase',
-                              subTitle: 'Tickets',
-                            ),
+                        CustomTicketCard(
+                          onTap: () {
+                            Get.to(PurchaseTicketScreen());
+                          },
+                          ticketObject: TicketScreenModel(
+                            imageUrl: AppAssets().purchase,
+                            title: 'Purchase',
+                            subTitle: 'Tickets',
                           ),
                         ),
                         CustomTicketCard(

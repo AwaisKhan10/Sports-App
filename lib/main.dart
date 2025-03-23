@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
 import 'package:sports_app/ui/screens/%20%20ticketing/%20%20ticketing_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
 import 'package:sports_app/ui/screens/parking/getting_help.dart';
@@ -8,7 +9,9 @@ import 'package:sports_app/ui/screens/parking/parking_diagram.dart';
 import 'package:sports_app/ui/screens/parking/parking_screen.dart';
 import 'package:sports_app/ui/screens/parking/parking_tips.dart';
 import 'package:sports_app/ui/screens/purchase_ticket/purchase_ticket_screen.dart';
+import 'package:sports_app/ui/screens/schedule/schedule_screen.dart';
 import 'package:sports_app/ui/screens/seating_diagram.dart/seating_diagram.dart';
+import 'package:sports_app/ui/screens/the_team/team_screen.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
             useMaterial3: true,
           ),
-          home: DrawerScreen(),
+          home: TheTeamScreen(),
         );
       },
     );

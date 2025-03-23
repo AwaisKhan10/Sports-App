@@ -49,6 +49,6 @@ class ScrollViewViewModel extends GetxController {
   //
   List<ShowUpcomingModel> showUpcomings = [
     ShowUpcomingModel(imageUrl: AppAssets().dp, name: 'San Jose Earthquakes'),
-    ShowUpcomingModel(imageUrl: AppAssets().dp, name: 'San Jose Earthquakes'),
+    ShowUpcomingModel(imageUrl: AppAssets().dp2, name: 'San Jose Earthquakes'),
   ];
 }
