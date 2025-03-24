@@ -49,4 +49,13 @@ class TeamViewModel extends BaseViewModel {
   ];
 
   List<TeamPlayerModel> get playersList => _playersList;
+
+  ///
+  ///
+  ///
+  ///      player profile view model is also here
+  ///
+  ///
+  ///
+  List<String> playerProfileData = [];
 }

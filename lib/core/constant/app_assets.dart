@@ -34,10 +34,11 @@ class AppAssets {
   String map = "$staticAssets/map.png";
   String dp2 = "$staticAssets/dp2.png";
 
-  //*************************      Ticketing screens       ********************************/
+  //*************************   after   Ticketing screens     ********************************/
   String contact = "$iconsAssets/contact.png";
   String tickets = "$iconsAssets/tickets.png";
   String seats = "$iconsAssets/seat.png";
   String purchase = "$iconsAssets/Purchase.png";
   String player = "$dynamicAssets/player.png";
+  String profileBack = "$dynamicAssets/profileBack.png";
 }
