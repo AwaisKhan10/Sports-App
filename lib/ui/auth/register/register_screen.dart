@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/auth_field_decoration.dart';
@@ -10,7 +9,6 @@ import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/auth/register/register_view_model.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
-import 'package:sports_app/ui/screens/home/home_screen.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/header.dart';
 import 'package:sports_app/widget/register_button.dart';

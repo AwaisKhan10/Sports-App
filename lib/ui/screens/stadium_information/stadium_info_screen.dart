@@ -10,6 +10,7 @@ import 'package:sports_app/ui/screens/%20%20ticketing/%20%20ticketing_screen.dar
 import 'package:sports_app/ui/screens/%20%20ticketing/ticketing_view_model.dart';
 import 'package:sports_app/ui/screens/parking/getting_help.dart';
 import 'package:sports_app/ui/screens/parking/parking_diagram.dart';
+import 'package:sports_app/ui/screens/parking/parking_screen.dart';
 import 'package:sports_app/ui/screens/parking/parking_tips.dart';
 import 'package:sports_app/ui/screens/stadium_information/faqs.dart';
 import 'package:sports_app/ui/screens/stadium_information/guest_services.dart';
@@ -50,6 +51,7 @@ class StadiumInformationScreen extends StatelessWidget {
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().purchase,
                             title: 'Amenities',
+                            subTitle: '',
                           ),
                         ),
                         CustomTicketCard(
@@ -59,6 +61,7 @@ class StadiumInformationScreen extends StatelessWidget {
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().guest,
                             title: 'Guest Service',
+                            subTitle: '',
                           ),
                         ),
 
@@ -70,16 +73,18 @@ class StadiumInformationScreen extends StatelessWidget {
                             ticketObject: TicketScreenModel(
                               imageUrl: AppAssets().contact,
                               title: 'Getting Help',
+                              subTitle: '',
                             ),
                           ),
                         ),
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(TicketingScreen());
+                            Get.to(ParkingScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().parking,
                             title: 'Parking',
+                            subTitle: '',
                           ),
                         ),
                         CustomTicketCard(

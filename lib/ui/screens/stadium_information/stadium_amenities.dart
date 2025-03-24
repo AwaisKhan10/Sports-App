@@ -82,24 +82,26 @@ class _StadiumInfoAmenitiesScreenState
             child: Scaffold(
               backgroundColor: scaffoldColor,
               appBar: AppBar(backgroundColor: whiteColor),
-              body: Column(
-                children: [
-                  CustomHeader(
-                    title: 'Amenities',
-                    icon: Icons.keyboard_backspace_rounded,
-                    onTap: () {
-                      navigator!.pop(context);
-                    },
-                  ),
-                  CustomDropDownExpendableButton(
-                    text:
-                        ' Please type in a question below and tap Ask, Well \n  find the best answer to assist you and point \n you to the information that you need! \nonly',
-                  ),
-                  20.verticalSpace,
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CustomHeader(
+                      title: 'Amenities',
+                      icon: Icons.keyboard_backspace_rounded,
+                      onTap: () {
+                        navigator!.pop(context);
+                      },
+                    ),
+                    CustomDropDownExpendableButton(
+                      text:
+                          ' Please type in a question below and tap Ask, Well \n  find the best answer to assist you and point \n you to the information that you need! \nonly',
+                    ),
+                    20.verticalSpace,
 
-                  // 🔹 Search & Filter Section
-                  _searchFilterSection(),
-                ],
+                    // 🔹 Search & Filter Section
+                    _searchFilterSection(),
+                  ],
+                ),
               ),
             ),
           );

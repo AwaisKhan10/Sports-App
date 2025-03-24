@@ -36,6 +36,7 @@ class AppAssets {
   String map = "$staticAssets/map.png";
   String dp2 = "$staticAssets/dp2.png";
   String infoStadium = "$staticAssets/infoStadium.png";
+  String spoons = "$staticAssets/spoons.png";
 
   //*************************   after   Ticketing screens     ********************************/
   String contact = "$iconsAssets/contact.png";
