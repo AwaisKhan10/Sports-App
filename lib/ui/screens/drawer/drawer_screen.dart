@@ -23,10 +23,7 @@ class DrawerScreen extends StatelessWidget {
             appBar: AppBar(
               toolbarHeight: 70.h,
               centerTitle: true,
-              title: Text(
-                "change it according to taped screen",
-                style: style20B,
-              ),
+              title: Text(model.currentScreenName, style: style20B),
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
             ),

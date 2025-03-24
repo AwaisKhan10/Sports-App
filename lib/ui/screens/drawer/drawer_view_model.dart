@@ -18,31 +18,44 @@ import 'package:sports_app/ui/screens/the_team/team_screen.dart';
 class DrawerScreenViewModel extends ChangeNotifier {
   int _selectedIndex = 0; // Default screen index
 
+  final List<String> screenNames = [
+    "Home",
+    "Scroll View",
+    "Ticketing",
+    "Parking",
+    "Schedule",
+    "The Team",
+    "Notification",
+    "Fan Engagement",
+    "Stadium Information",
+    "Merchandise",
+    "Concession",
+    "MLS Matchday",
+    "Info/Support",
+  ];
+
   final List<Widget> screens = [
-    HomeScreen(), // Home
-    ScrollViewScreen(), // Scroll View
-    TicketingScreen(), // Ticketing
-    ParkingScreen(), // Home
-    ScheduleScreen(), // Scroll View
-    TheTeamScreen(), // Ticketing
-    NotificationScreen(), // Home
-    FanEngagementScreen(), // Scroll View
-    StadiumInformationScreen(), // Ticketing  SignInScreen(), // Home
-    MerchandiseScreen(), // Scroll View
-    ConcessionScreen(), // Ticketing
-    MLSmatchday(), // Home
-    InfoSupportScreen(), // Scroll View
+    HomeScreen(),
+    ScrollViewScreen(),
+    TicketingScreen(),
+    ParkingScreen(),
+    ScheduleScreen(),
+    TheTeamScreen(),
+    NotificationScreen(),
+    FanEngagementScreen(),
+    StadiumInformationScreen(),
+    MerchandiseScreen(),
+    ConcessionScreen(),
+    MLSmatchday(),
+    InfoSupportScreen(),
   ];
 
   int get selectedIndex => _selectedIndex;
-  Widget get currentScreen => screens[_selectedIndex]; // Get selected screen
+  Widget get currentScreen => screens[_selectedIndex];
+  String get currentScreenName => screenNames[_selectedIndex];
 
   void updateIndex(int index) {
     _selectedIndex = index;
-    print(
-      'print('
-      ');',
-    );
-    notifyListeners(); // Notify UI of the change
+    notifyListeners();
   }
 }

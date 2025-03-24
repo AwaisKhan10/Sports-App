@@ -26,13 +26,16 @@ class AppAssets {
   String scrollView = "$iconsAssets/scrollView.png";
   String team = "$iconsAssets/team.png";
   String ticket = "$iconsAssets/Ticket.png";
+
   String profilePic = "$staticAssets/profilePic.png";
   String tickText = "$staticAssets/tickText.png";
   String seatingGround = "$staticAssets/seatingGround.png";
   String groundInfo = "$staticAssets/groundInfo.png";
   String parkingDiagram = "$staticAssets/parkingDiagram.png";
+  String guest = "$staticAssets/guest.png";
   String map = "$staticAssets/map.png";
   String dp2 = "$staticAssets/dp2.png";
+  String infoStadium = "$staticAssets/infoStadium.png";
 
   //*************************   after   Ticketing screens     ********************************/
   String contact = "$iconsAssets/contact.png";

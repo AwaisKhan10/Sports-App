@@ -25,4 +25,8 @@ class TicketingViewModel extends BaseViewModel {
       subTitle: 'Tickets',
     ),
   ];
+
+  ///
+  ///      stadium information view model is also here
+  ///
 }

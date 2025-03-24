@@ -1,9 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
-import 'package:sports_app/ui/screens/the_team/player_profile.dart';
-import 'package:sports_app/ui/screens/the_team/team_screen.dart';
+import 'package:sports_app/ui/screens/stadium_information/stadium_info_screen.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +31,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
             useMaterial3: true,
           ),
-          home: DrawerScreen(),
+          home: StadiumInformationScreen(),
         );
       },
     );

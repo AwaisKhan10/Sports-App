@@ -12,7 +12,7 @@ import 'package:sports_app/ui/screens/parking/parking_diagram.dart';
 import 'package:sports_app/ui/screens/parking/parking_tips.dart';
 import 'package:sports_app/ui/screens/parking/parking_view_model.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
-import 'package:sports_app/widget/main_tick_screen_card.dart';
+import 'package:sports_app/widget/main_tickt_screen_card.dart';
 
 class ParkingScreen extends StatelessWidget {
   const ParkingScreen({super.key});

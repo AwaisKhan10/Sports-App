@@ -11,7 +11,7 @@ import 'package:sports_app/ui/screens/%20%20ticketing/ticketing_view_model.dart'
 import 'package:sports_app/ui/screens/purchase_ticket/purchase_ticket_screen.dart';
 import 'package:sports_app/ui/screens/seating_diagram.dart/seating_diagram.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
-import 'package:sports_app/widget/main_tick_screen_card.dart';
+import 'package:sports_app/widget/main_tickt_screen_card.dart';
 
 class TicketingScreen extends StatelessWidget {
   const TicketingScreen({super.key});
