@@ -164,7 +164,7 @@ class _StadiumInfoAmenitiesScreenState
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(FreshClassicScreen());
+                      Get.to(() => FreshClassicScreen());
                     },
                     child: Container(
                       height: 50.h,

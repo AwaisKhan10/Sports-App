@@ -42,14 +42,15 @@ class CustomTicketCard extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(
-              ticketObject.subTitle!,
-              style: style16.copyWith(
-                fontSize: 16,
-                color: whiteColor,
-                fontWeight: FontWeight.w500,
+            if (ticketObject.subTitle != null)
+              Text(
+                ticketObject.subTitle!,
+                style: style16.copyWith(
+                  fontSize: 16,
+                  color: whiteColor,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
           ],
         ),
       ),

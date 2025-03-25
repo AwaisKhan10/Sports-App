@@ -107,7 +107,7 @@ class RegisterScreen extends StatelessWidget {
           CustomRegisterButton(
             onPressed: () {
               print('screen : $DrawerScreen');
-              Get.to(DrawerScreen());
+              Get.to(() => DrawerScreen());
             },
             firstColor: thirdSecondaryColor,
             secondColor: secondaryColor,

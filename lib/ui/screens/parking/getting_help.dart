@@ -35,7 +35,7 @@ class GettingHelpScreen extends StatelessWidget {
             20.verticalSpace,
             CustomDirectionContainer(
               onTap: () {
-                Get.to(Map_GettingHelpScreen());
+                Get.to(() => Map_GettingHelpScreen());
               },
             ),
             40.verticalSpace,

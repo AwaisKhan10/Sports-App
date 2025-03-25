@@ -24,7 +24,8 @@ class ScrollViewScreen extends StatelessWidget {
             children: [
               // CustomHeader(title: 'Scroll View'),
               CustomDropDownExpendableButton(
-                text: 'dfghjhgfghjhgfhjhgfghjhgfh',
+                text:
+                    'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
               ),
               GridView.builder(
                 shrinkWrap: true,

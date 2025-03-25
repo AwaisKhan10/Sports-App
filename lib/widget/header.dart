@@ -7,7 +7,14 @@ class CustomHeader extends StatelessWidget {
   final String title;
   final IconData? icon;
   final VoidCallback? onTap;
-  const CustomHeader({super.key, required this.title, this.icon, this.onTap});
+  final IconData? icon2;
+  const CustomHeader({
+    super.key,
+    required this.title,
+    this.icon,
+    this.onTap,
+    this.icon2,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class CustomHeader extends StatelessWidget {
             title,
             style: style20B.copyWith(color: blackColor, fontSize: 22.sp),
           ),
-          Text('okj', style: TextStyle(color: whiteColor)),
+          Icon(icon2, color: blackColor),
         ],
       ),
     );

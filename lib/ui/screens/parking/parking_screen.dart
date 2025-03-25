@@ -30,7 +30,7 @@ class ParkingScreen extends StatelessWidget {
               children: [
                 CustomDropDownExpendableButton(
                   text:
-                      'qwertyuioplkjhgfdazxcvbnm,klpoiuytrewqazxcvbnmklkjhgfdsaqwertyuiopkmnbvcxsawertyuioplkjhgfdsazxcvbnm,lpoiuytrewqasdfghjkl,mnbvcxza',
+                      'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
                 ),
                 Expanded(
                   child: Center(
@@ -40,7 +40,7 @@ class ParkingScreen extends StatelessWidget {
                       children: [
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(ParkingDiagramScreen());
+                            Get.to(() => ParkingDiagramScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().purchase,
@@ -50,7 +50,7 @@ class ParkingScreen extends StatelessWidget {
                         ),
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(ParkingTipsScreen());
+                            Get.to(() => ParkingTipsScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().ticket,
@@ -61,7 +61,7 @@ class ParkingScreen extends StatelessWidget {
 
                         GestureDetector(
                           onTap: () {
-                            Get.to(GettingHelpScreen());
+                            Get.to(() => GettingHelpScreen());
                           },
                           child: CustomTicketCard(
                             ticketObject: TicketScreenModel(

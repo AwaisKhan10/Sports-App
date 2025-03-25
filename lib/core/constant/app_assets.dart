@@ -37,6 +37,15 @@ class AppAssets {
   String dp2 = "$staticAssets/dp2.png";
   String infoStadium = "$staticAssets/infoStadium.png";
   String spoons = "$staticAssets/spoons.png";
+  String onlineShirt = "$staticAssets/onlineshirt.png";
+  //*************************   home screens     ********************************/
+  String youtube = "$staticAssets/youtube.png";
+  String twitter = "$staticAssets/twitter.png";
+  String tiktok = "$staticAssets/tiktok.png";
+  String snap = "$staticAssets/snap.png";
+  String insta = "$staticAssets/insta.png";
+  String fb = "$staticAssets/fb.png";
+  String onlineStore = "$staticAssets/onlineStore.png";
 
   //*************************   after   Ticketing screens     ********************************/
   String contact = "$iconsAssets/contact.png";
@@ -45,4 +54,7 @@ class AppAssets {
   String purchase = "$iconsAssets/Purchase.png";
   String player = "$dynamicAssets/player.png";
   String profileBack = "$dynamicAssets/profileBack.png";
+  String tShirt = "$iconsAssets/tShirt.png";
+  String downloadIcon = "$iconsAssets/downloadIcon.png";
+  String wallIcon = "$iconsAssets/wall.png";
 }

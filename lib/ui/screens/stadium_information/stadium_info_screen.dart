@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/model/ticket.dart';
-import 'package:sports_app/ui/screens/%20%20ticketing/%20%20ticketing_screen.dart';
 import 'package:sports_app/ui/screens/%20%20ticketing/ticketing_view_model.dart';
 import 'package:sports_app/ui/screens/parking/getting_help.dart';
-import 'package:sports_app/ui/screens/parking/parking_diagram.dart';
 import 'package:sports_app/ui/screens/parking/parking_screen.dart';
-import 'package:sports_app/ui/screens/parking/parking_tips.dart';
 import 'package:sports_app/ui/screens/stadium_information/faqs.dart';
 import 'package:sports_app/ui/screens/stadium_information/guest_services.dart';
 import 'package:sports_app/ui/screens/stadium_information/stadium_amenities.dart';
@@ -35,7 +31,7 @@ class StadiumInformationScreen extends StatelessWidget {
               children: [
                 CustomDropDownExpendableButton(
                   text:
-                      'qwertyuiopkjnbvcdhghchbkcbchbjdshcbhcbwhcbwybwydqwertyuidfghjwertyuwertyrtyuilkmn cfghjnb',
+                      'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
                 ),
 
                 Expanded(
@@ -46,50 +42,46 @@ class StadiumInformationScreen extends StatelessWidget {
                       children: [
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(StadiumInfoAmenitiesScreen());
+                            Get.to(() => StadiumInfoAmenitiesScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().purchase,
                             title: 'Amenities',
-                            subTitle: '',
                           ),
                         ),
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(GuestServicesScreen());
+                            Get.to(() => GuestServicesScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().guest,
                             title: 'Guest Service',
-                            subTitle: '',
                           ),
                         ),
 
                         GestureDetector(
                           onTap: () {
-                            Get.to(GettingHelpScreen());
+                            Get.to(() => GettingHelpScreen());
                           },
                           child: CustomTicketCard(
                             ticketObject: TicketScreenModel(
                               imageUrl: AppAssets().contact,
                               title: 'Getting Help',
-                              subTitle: '',
                             ),
                           ),
                         ),
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(ParkingScreen());
+                            Get.to(() => ParkingScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().parking,
                             title: 'Parking',
-                            subTitle: '',
                           ),
                         ),
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(FaqsScreen());
+                            Get.to(() => FaqsScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().seats,
@@ -99,7 +91,7 @@ class StadiumInformationScreen extends StatelessWidget {
                         ),
                         CustomTicketCard(
                           onTap: () {
-                            Get.to(StadiumAssistScreen());
+                            Get.to(() => StadiumAssistScreen());
                           },
                           ticketObject: TicketScreenModel(
                             imageUrl: AppAssets().contact,

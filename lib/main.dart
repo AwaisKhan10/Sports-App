@@ -1,9 +1,9 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
-import 'package:sports_app/ui/screens/stadium_information/fresh_classic.dart';
-import 'package:sports_app/ui/screens/stadium_information/stadium_info_screen.dart';
+import 'package:sports_app/ui/screens/fan_engagement/fan_engegement_screen.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
             useMaterial3: true,
           ),
-          home: DrawerScreen(),
+          home: SignInScreen(),
         );
       },
     );

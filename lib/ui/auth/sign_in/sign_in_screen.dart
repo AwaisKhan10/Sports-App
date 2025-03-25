@@ -85,7 +85,7 @@ class SignInScreen extends StatelessWidget {
           30.verticalSpace,
           CustomRegisterButton(
             onPressed: () {
-              Get.to(() => DrawerScreen()); // ✅ Now it will navigate
+              Get.to(() => DrawerScreen());
             },
             firstColor: lightRedColor,
             secondColor: primaryColor,
@@ -103,7 +103,7 @@ class SignInScreen extends StatelessWidget {
               3.horizontalSpace,
               GestureDetector(
                 onTap: () {
-                  Get.to(RegisterScreen());
+                  Get.to(() => RegisterScreen());
                   print('Screen name $RegisterScreen');
                 },
                 child: Text(

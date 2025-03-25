@@ -26,7 +26,8 @@ class FaqsScreen extends StatelessWidget {
               },
             ),
             CustomDropDownExpendableButton(
-              text: 'qwertyuiopasdfghjklzxcvbnmasdfghjkwertyui',
+              text:
+                  'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
             ),
             30.verticalSpace,
             _services('Where is the stadium located?'),

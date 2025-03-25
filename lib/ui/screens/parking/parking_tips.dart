@@ -29,7 +29,7 @@ class ParkingTipsScreen extends StatelessWidget {
             30.verticalSpacingDiagonal,
             CustomDirectionContainer(
               onTap: () {
-                Get.to(Map_GettingHelpScreen());
+                Get.to(() => Map_GettingHelpScreen());
               },
             ),
             20.verticalSpace,

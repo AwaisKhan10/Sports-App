@@ -10,11 +10,20 @@ import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/team_player_card_for_name_tab.dart';
 import 'package:sports_app/widget/team_player_card_position_tab.dart';
 
-class TheTeamScreen extends StatelessWidget {
+class TheTeamScreen extends StatefulWidget {
   const TheTeamScreen({Key? key}) : super(key: key);
 
   @override
+  State<TheTeamScreen> createState() => _TheTeamScreenState();
+}
+
+class _TheTeamScreenState extends State<TheTeamScreen> {
+  @override
   Widget build(BuildContext context) {
+    bool isselected = false;
+    setState(() {
+      isselected = !isselected;
+    });
     return ChangeNotifierProvider(
       create: (context) => TeamViewModel(),
       child: Consumer<TeamViewModel>(
@@ -29,7 +38,8 @@ class TheTeamScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     CustomDropDownExpendableButton(
-                      text: 'qwertyuiopl,mnbvcxzasdfghjkl',
+                      text:
+                          'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
                     ),
                     30.verticalSpace,
                     TabBar(
@@ -46,13 +56,15 @@ class TheTeamScreen extends StatelessWidget {
                         SizedBox(
                           height: 35.h,
 
-                          child: Tab(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 40),
-                              child: Text(
-                                'Name',
-                                style: style16.copyWith(
-                                  fontWeight: FontWeight.w400,
+                          child: GestureDetector(
+                            child: Tab(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 40),
+                                child: Text(
+                                  'Name',
+                                  style: style16.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
                             ),
@@ -113,7 +125,7 @@ class TheTeamScreen extends StatelessWidget {
         return CustomTeamPlayerNameCard(
           player: players[index],
           onTap: () {
-            Get.to(PlayerProfileScreen());
+            Get.to(() => PlayerProfileScreen());
           },
         );
       },
@@ -131,7 +143,7 @@ class TheTeamScreen extends StatelessWidget {
         return CustomTeamPlayerPositionCard(
           player: players[index],
           onTap: () {
-            Get.to(PlayerProfileScreen());
+            Get.to(() => PlayerProfileScreen());
           },
         );
       },
@@ -151,7 +163,7 @@ class TheTeamScreen extends StatelessWidget {
           return CustomTeamPlayerNameCard(
             player: players[index ~/ 2],
             onTap: () {
-              Get.to(PlayerProfileScreen());
+              Get.to(() => PlayerProfileScreen());
             },
           );
         } else {
@@ -159,7 +171,7 @@ class TheTeamScreen extends StatelessWidget {
           return CustomTeamPlayerPositionCard(
             player: players[index ~/ 2],
             onTap: () {
-              Get.to(PlayerProfileScreen());
+              Get.to(() => PlayerProfileScreen());
             },
           );
         }

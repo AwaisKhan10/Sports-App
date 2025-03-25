@@ -72,7 +72,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Get.to(SignInScreen());
+                      Get.to(() => SignInScreen());
                     },
                     child: Text("Login", style: TextStyle(color: Colors.white)),
                   ),
