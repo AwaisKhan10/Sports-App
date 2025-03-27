@@ -12,8 +12,9 @@ class InfoSupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scaffoldColor,
-      appBar: AppBar(backgroundColor: whiteColor),
+      ///
+      /// Start Body
+      ///
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(

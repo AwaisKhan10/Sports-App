@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:sports_app/core/constant/app_assets.dart';
-import 'package:sports_app/core/constant/colors.dart';
-import 'package:sports_app/core/constant/text_style.dart';
-import 'package:sports_app/core/model/online_store.dart';
 import 'package:sports_app/ui/screens/%20merchandise/merchandise_screen_view_model.dart';
-import 'package:sports_app/widget/header.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sports_app/core/constant/app_assets.dart';
+import 'package:sports_app/core/constant/text_style.dart';
+import 'package:sports_app/core/constant/colors.dart';
+import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/online_store_card.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:sports_app/widget/header.dart';
 
 class OnlineStoreScreen extends StatelessWidget {
   const OnlineStoreScreen({super.key});
@@ -19,19 +19,20 @@ class OnlineStoreScreen extends StatelessWidget {
       child: Consumer<MerchandiseScreenViewModel>(
         builder: (context, model, child) {
           return Scaffold(
-            backgroundColor: scaffoldColor,
-            appBar: AppBar(backgroundColor: whiteColor),
+            ///
+            /// App Bar
+            ///
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(60.h),
+              child: CustomAppBar(title: 'Online Store'),
+            ),
+
+            ///
+            /// Start Body
+            ///
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  CustomHeader(
-                    title: 'Online Store',
-                    icon: Icons.arrow_back_outlined,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    icon2: Icons.shopping_cart_outlined,
-                  ),
                   Image.asset(AppAssets().onlineStore),
                   20.verticalSpace,
                   _storeItems(model),
@@ -53,10 +54,12 @@ class OnlineStoreScreen extends StatelessWidget {
           Text('Store Items', style: style18),
           20.verticalSpace,
           GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 20,
               crossAxisSpacing: 10,
+              childAspectRatio: 0.7,
             ),
             itemCount: model.OnlineStoreItems.length,
             shrinkWrap: true,

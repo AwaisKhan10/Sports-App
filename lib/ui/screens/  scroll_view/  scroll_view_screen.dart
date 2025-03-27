@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -5,7 +7,6 @@ import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/%20%20scroll_view/scroll_view_view_model.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
-import 'package:sports_app/widget/header.dart';
 import 'package:sports_app/widget/scroll_view_screen_widget.dart';
 import 'package:sports_app/widget/scroll_view_show_upcoming.dart';
 
@@ -16,24 +17,27 @@ class ScrollViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldColor,
-      appBar: AppBar(backgroundColor: whiteColor),
+
       body: Obx(() {
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // CustomHeader(title: 'Scroll View'),
-              CustomDropDownExpendableButton(
-                text:
-                    'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+              Center(
+                child: CustomDropDownExpendableButton(
+                  text:
+                      'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+                ),
               ),
               GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 padding: EdgeInsets.all(10),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 2.1,
+                  childAspectRatio: 1.7,
                 ),
 
                 itemCount: model.tweets.length,

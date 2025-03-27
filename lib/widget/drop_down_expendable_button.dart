@@ -1,76 +1,5 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:sports_app/core/constant/colors.dart';
-// import 'package:sports_app/core/constant/text_style.dart';
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
-// class CustomDropDownExpendableButton extends StatefulWidget {
-//   final String text;
-
-//   const CustomDropDownExpendableButton({required this.text});
-
-//   @override
-//   _CustomDropDownExpendableButtonState createState() =>
-//       _CustomDropDownExpendableButtonState();
-// }
-
-// class _CustomDropDownExpendableButtonState
-//     extends State<CustomDropDownExpendableButton> {
-//   bool _isExpanded = false;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         GestureDetector(
-//           onTap: () {
-//             setState(() {
-//               _isExpanded = !_isExpanded;
-//             });
-//           },
-//           child: Container(
-//             height: 33.h,
-//             width: 47.w,
-//             decoration: BoxDecoration(
-//               color: primaryColor,
-//               borderRadius: BorderRadius.only(
-//                 bottomLeft: Radius.circular(99),
-//                 bottomRight: Radius.circular(99),
-//               ),
-//             ),
-//             child: Center(
-//               child: Icon(
-//                 _isExpanded
-//                     ? Icons.keyboard_arrow_up
-//                     : Icons.keyboard_arrow_down,
-//                 size: 30,
-//                 color: whiteColor,
-//               ),
-//             ),
-//           ),
-//         ),
-//         AnimatedContainer(
-//           duration: Duration(milliseconds: 500),
-//           //  height: _isExpanded ? 120.h : 0,
-//           width: double.infinity,
-//           color: scaffoldColor,
-//           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-//           child:
-//               _isExpanded
-//                   ? Column(
-//                     children: [
-//                       Text(
-//                         widget.text,
-//                         textAlign: TextAlign.center,
-//                         style: style16.copyWith(),
-//                       ),
-//                     ],
-//                   )
-//                   : null,
-//         ),
-//       ],
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sports_app/core/constant/colors.dart';
@@ -108,6 +37,13 @@ class _CustomDropDownExpendableButtonState
   }
 
   @override
+  /*************  ✨ Codeium Command ⭐  *************/
+  /// Properly dispose the animation controller.
+  ///
+  /// The [AnimationController] must be disposed of to prevent memory leaks.
+  /// This method is automatically called when the [StatefulWidget] is removed
+  /// from the tree.
+  /******  c7a935d2-e7da-46ab-8561-c46da4b83b43  *******/
   void dispose() {
     _controller.dispose(); // Properly dispose animation
     super.dispose();
@@ -132,50 +68,76 @@ class _CustomDropDownExpendableButtonState
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GestureDetector(
-          onTap: _toggleExpansion,
-          child: Container(
-            height: 33.h,
-            width: 47.w,
-            decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(99),
-                bottomRight: Radius.circular(99),
+        _isExpanded == false
+            ? GestureDetector(
+              onTap: _toggleExpansion,
+              child: Container(
+                height: 33.h,
+                width: 47.w,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(99),
+                    bottomRight: Radius.circular(99),
+                  ),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 30,
+                    color: whiteColor,
+                  ),
+                ),
               ),
-            ),
-            child: Center(
-              child: Icon(
-                _isExpanded
-                    ? Icons.keyboard_arrow_up
-                    : Icons.keyboard_arrow_down,
-                size: 30,
-                color: whiteColor,
+            )
+            : SizedBox(),
+        _isExpanded
+            ?
+            /// **Sliding Animation Container**
+            AnimatedContainer(
+              color: whiteColor,
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOut, // Smooth animation curve
+              // height: _isExpanded ? 140.h : 0, // Expands vertically
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: SlideTransition(
+                position: _slideAnimation,
+                child:
+                    _isExpanded
+                        ? Text(
+                          widget.text,
+                          textAlign: TextAlign.center,
+                          style: style16.copyWith(),
+                        )
+                        : null,
               ),
-            ),
-          ),
-        ),
+            )
+            : SizedBox(),
 
-        /// **Sliding Animation Container**
-        AnimatedContainer(
-          color: whiteColor,
-          duration: Duration(milliseconds: 500),
-          curve: Curves.easeInOut, // Smooth animation curve
-          height: _isExpanded ? 120.h : 0, // Expands vertically
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: SlideTransition(
-            position: _slideAnimation,
-            child:
-                _isExpanded
-                    ? Text(
-                      widget.text,
-                      textAlign: TextAlign.center,
-                      style: style16.copyWith(),
-                    )
-                    : null,
-          ),
-        ),
+        _isExpanded == true
+            ? GestureDetector(
+              onTap: _toggleExpansion,
+              child: Container(
+                height: 33.h,
+                width: 47.w,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(99),
+                    bottomRight: Radius.circular(99),
+                  ),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.keyboard_arrow_up,
+                    size: 30,
+                    color: whiteColor,
+                  ),
+                ),
+              ),
+            )
+            : SizedBox(),
       ],
     );
   }

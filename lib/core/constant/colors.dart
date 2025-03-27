@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color blackColor = Color(0xff000000);
 const Color whiteColor = Color(0xffffffff);
-const Color scaffoldColor = Color.fromARGB(249, 249, 249, 249);
+const Color scaffoldColor = Color(0xffF9F9F9);
 const Color lightGreenyColor = Color(0xff4ADE80); // switch button
 const Color darkGreyColor = Color(0xff737373); //d grey
 const Color lightgreyColor = Color(0xffA5A5A5); //l grey

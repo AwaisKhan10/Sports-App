@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/parking/map.dart';
+import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/direction_form_my_location.dart';
 import 'package:sports_app/widget/header.dart';
 
@@ -13,19 +14,22 @@ class ParkingTipsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: whiteColor),
+      ///
+      /// App Bar
+      ///
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.h),
+        child: CustomAppBar(title: "Parking tips"),
+      ),
+
+      ///
+      /// Start Body
+      ///
       backgroundColor: scaffoldColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           children: [
-            CustomHeader(
-              title: 'Parking tips',
-              icon: Icons.arrow_back_rounded,
-              onTap: () {
-                navigator!.pop(context);
-              },
-            ),
             30.verticalSpacingDiagonal,
             CustomDirectionContainer(
               onTap: () {

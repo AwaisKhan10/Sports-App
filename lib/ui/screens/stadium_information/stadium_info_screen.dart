@@ -25,7 +25,6 @@ class StadiumInformationScreen extends StatelessWidget {
       child: Consumer<TicketingViewModel>(
         builder: (context, value, child) {
           return Scaffold(
-            appBar: AppBar(backgroundColor: whiteColor),
             backgroundColor: scaffoldColor,
             body: Column(
               children: [

@@ -4,6 +4,7 @@ import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/core/model/ticket.dart';
+import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/header.dart';
 import 'package:sports_app/widget/main_tickt_screen_card.dart';
 
@@ -13,20 +14,22 @@ class GuestServicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scaffoldColor,
-      appBar: AppBar(backgroundColor: whiteColor),
+      ///
+      /// App Bar
+      ///
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.h),
+        child: CustomAppBar(title: 'Guest Services'),
+      ),
+
+      ///
+      /// Start Body
+      ///
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomHeader(
-              title: 'Guest Services',
-              icon: Icons.arrow_back_rounded,
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
             40.verticalSpace,
             _services('Need Help? Need Information? Visit Guest Service'),
             20.verticalSpace,

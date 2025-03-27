@@ -5,6 +5,7 @@ import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/the_team/team_view_model.dart';
+import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/header.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -18,18 +19,21 @@ class PlayerProfileScreen extends StatelessWidget {
       child: Consumer<TeamViewModel>(
         builder: (context, value, child) {
           return Scaffold(
-            appBar: AppBar(backgroundColor: whiteColor),
+            ///
+            /// App Bar
+            ///
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(60.h),
+              child: CustomAppBar(title: 'Player Profile'),
+            ),
+
+            ///
+            /// Start Body
+            ///
             backgroundColor: scaffoldColor,
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  CustomHeader(
-                    title: 'player Profile',
-                    icon: Icons.arrow_back_rounded,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
                   SizedBox(
                     height:
                         MediaQuery.of(context).size.height *

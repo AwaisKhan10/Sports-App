@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
+import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/header.dart';
 
 class ParkingDiagramScreen extends StatelessWidget {
@@ -9,15 +11,19 @@ class ParkingDiagramScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: whiteColor),
+      ///
+      /// App Bar
+      ///
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.h),
+        child: CustomAppBar(title: "Parking Diagram"),
+      ),
+
+      ///
+      /// Start Body
+      ///
       body: Column(
-        children: [
-          CustomHeader(
-            title: 'Parking Diagram',
-            icon: Icons.arrow_back_rounded,
-          ),
-          Image.asset(AppAssets().parkingDiagram, scale: 4),
-        ],
+        children: [Image.asset(AppAssets().parkingDiagram, scale: 4)],
       ),
     );
   }

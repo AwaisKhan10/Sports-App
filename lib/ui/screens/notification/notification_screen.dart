@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/ui/screens/notification/notification_view_model.dart';
@@ -17,24 +16,27 @@ class NotificationScreen extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             backgroundColor: scaffoldColor,
-            appBar: AppBar(backgroundColor: whiteColor),
-            body: Column(
-              children: [
-                CustomDropDownExpendableButton(
-                  text:
-                      'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
-                ),
-                ListView.builder(
-                  itemCount: model.notifications.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return CustomNotificationCard(
-                      notification: model.notifications[index],
-                    );
-                  },
-                ),
-              ],
+
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomDropDownExpendableButton(
+                    text:
+                        'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+                  ),
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: model.notifications.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) {
+                      return CustomNotificationCard(
+                        notification: model.notifications[index],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           );
         },

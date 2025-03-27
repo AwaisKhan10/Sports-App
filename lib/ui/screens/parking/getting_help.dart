@@ -5,6 +5,7 @@ import 'package:get/instance_manager.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/parking/map.dart';
+import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/direction_form_my_location.dart';
 import 'package:sports_app/widget/header.dart';
 
@@ -14,20 +15,22 @@ class GettingHelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: whiteColor),
-      backgroundColor: scaffoldColor,
+      ///
+      /// App Bar
+      ///
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.h),
+        child: CustomAppBar(title: "Getting Help"),
+      ),
+
+      ///
+      /// Start Body
+      ///
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomHeader(
-              title: 'Getting Help',
-              icon: Icons.arrow_back_rounded,
-              onTap: () {
-                navigator!.pop(context);
-              },
-            ),
             Text(
               'Driving Direction',
               style: style18.copyWith(fontWeight: FontWeight.w500),

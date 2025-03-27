@@ -13,8 +13,9 @@ class MLSmatchday extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scaffoldColor,
-      appBar: AppBar(backgroundColor: whiteColor),
+      ///
+      /// Start Body
+      ///
       body: Column(
         children: [
           Stack(
@@ -40,9 +41,11 @@ class MLSmatchday extends StatelessWidget {
                   ),
                 ],
               ),
-              CustomDropDownExpendableButton(
-                text:
-                    'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+              Center(
+                child: CustomDropDownExpendableButton(
+                  text:
+                      'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+                ),
               ),
             ],
           ),

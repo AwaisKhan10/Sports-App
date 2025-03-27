@@ -1,12 +1,11 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
-import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
-import 'package:sports_app/ui/screens/fan_engagement/fan_engegement_screen.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Sports App',
           theme: ThemeData(
-            // scaffoldBackgroundColor: backGroundColor,
+            scaffoldBackgroundColor: scaffoldColor,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
             useMaterial3: true,
           ),

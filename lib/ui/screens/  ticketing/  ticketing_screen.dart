@@ -1,6 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
@@ -23,7 +24,7 @@ class TicketingScreen extends StatelessWidget {
       child: Consumer<TicketingViewModel>(
         builder: (context, value, child) {
           return Scaffold(
-            appBar: AppBar(backgroundColor: whiteColor),
+            backgroundColor: whiteColor,
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -53,10 +54,10 @@ class TicketingScreen extends StatelessWidget {
                             title: 'My',
                             subTitle: 'Tickets',
                           ),
+                          onTap: () {},
                         ),
                         GestureDetector(
                           onTap: () {
-                            print('$SeatingDiagramScreen');
                             Get.to(() => SeatingDiagramScreen());
                           },
                           child: CustomTicketCard(
@@ -104,6 +105,7 @@ class TicketingScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: whiteColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),

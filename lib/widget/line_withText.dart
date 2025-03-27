@@ -14,37 +14,35 @@ class CustomLineWithText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 20.0,
-      ), // Adjust padding as needed
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center, // Center the content
-        children: [
-          Container(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center, // Center the content
+      children: [
+        Expanded(
+          child: Container(
             width: lineWidth, // Set the width of the line
             height: 1.0,
             color: Colors.grey, // Line color
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8.0,
-            ), // Space around the text
-            child: Text(
-              text,
-              style: GoogleFonts.poppins(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w300,
-              ),
+        ),
+        5.horizontalSpace,
+        Expanded(
+          child: Text(
+            text,
+            style: GoogleFonts.poppins(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w300,
             ),
           ),
-          Container(
+        ),
+        5.horizontalSpace,
+        Expanded(
+          child: Container(
             width: lineWidth, // Set the width of the line
             height: 1.0,
             color: Colors.grey, // Line color
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

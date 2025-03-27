@@ -9,6 +9,7 @@ import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/stadium_information/fresh_classic.dart';
 import 'package:sports_app/ui/screens/stadium_information/stadium_info_view_model.dart';
+import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/filter_button.dart';
 import 'package:sports_app/widget/header.dart';
@@ -79,19 +80,22 @@ class _StadiumInfoAmenitiesScreenState
                 _showSuggestions = false;
               });
             },
+
             child: Scaffold(
-              backgroundColor: scaffoldColor,
-              appBar: AppBar(backgroundColor: whiteColor),
+              ///
+              /// App Bar
+              ///
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(60.h),
+                child: CustomAppBar(title: 'Amenities'),
+              ),
+
+              ///
+              /// Start Body
+              ///
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomHeader(
-                      title: 'Amenities',
-                      icon: Icons.keyboard_backspace_rounded,
-                      onTap: () {
-                        navigator!.pop(context);
-                      },
-                    ),
                     CustomDropDownExpendableButton(
                       text:
                           ' Please type in a question below and tap Ask, Well \n  find the best answer to assist you and point \n you to the information that you need! \nonly',

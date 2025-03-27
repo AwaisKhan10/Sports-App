@@ -13,6 +13,7 @@ class CustomPurchaseTicketWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: whiteColor,
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15), // Increased border radius

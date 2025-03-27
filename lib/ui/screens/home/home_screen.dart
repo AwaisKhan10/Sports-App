@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, value, child) {
           return Scaffold(
             backgroundColor: scaffoldColor,
-            appBar: AppBar(backgroundColor: whiteColor),
+
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(

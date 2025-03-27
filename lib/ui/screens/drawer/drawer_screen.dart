@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
@@ -26,6 +25,8 @@ class DrawerScreen extends StatelessWidget {
               title: Text(model.currentScreenName, style: style20B),
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
+              shadowColor: scaffoldColor,
+              surfaceTintColor: scaffoldColor,
             ),
             drawer: CustomDrawer(), // Use the custom drawer here
             body:
@@ -46,6 +47,7 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
+          20.verticalSpace,
           // **User Profile Section**
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

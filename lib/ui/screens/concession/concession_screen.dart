@@ -15,8 +15,9 @@ class ConcessionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: scaffoldColor,
-      appBar: AppBar(backgroundColor: whiteColor),
+      ///
+      /// Start Body
+      ///
       body: Column(
         children: [
           Container(

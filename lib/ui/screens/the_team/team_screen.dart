@@ -32,7 +32,7 @@ class _TheTeamScreenState extends State<TheTeamScreen> {
             length: 3,
             child: Scaffold(
               backgroundColor: scaffoldColor,
-              appBar: AppBar(backgroundColor: whiteColor),
+
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
@@ -44,52 +44,34 @@ class _TheTeamScreenState extends State<TheTeamScreen> {
                     30.verticalSpace,
                     TabBar(
                       indicatorColor: whiteColor,
-                      labelColor: whiteColor,
-                      unselectedLabelColor: blackColor,
+                      labelColor: whiteColor, // Selected tab color
+                      unselectedLabelColor: blackColor, // Unselected tab color
                       tabAlignment: TabAlignment.start,
+                      dividerHeight: 0.0,
+                      indicatorAnimation: TabIndicatorAnimation.linear,
                       indicator: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: secondaryColor,
                       ),
                       isScrollable: true,
-                      tabs: [
-                        SizedBox(
-                          height: 35.h,
 
-                          child: GestureDetector(
-                            child: Tab(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 40),
-                                child: Text(
-                                  'Name',
-                                  style: style16.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
+                      tabs: const [
+                        Tab(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            child: Text('Name'),
                           ),
                         ),
                         Tab(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(
-                              'Position',
-                              style: style16.copyWith(
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
+                            child: Text('Position'),
                           ),
                         ),
                         Tab(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(
-                              'Number',
-                              style: style16.copyWith(
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
+                            child: Text('Number'),
                           ),
                         ),
                       ],

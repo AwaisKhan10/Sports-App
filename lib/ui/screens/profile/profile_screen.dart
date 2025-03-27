@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/auth_field_decoration.dart';
@@ -107,19 +106,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           40.verticalSpace,
           CustomRegisterButton(
-            firstColor: primaryColor,
-            secondColor: primaryColor,
+            color: primaryColor,
+
             title: 'save changes',
-            firstTextColor: whiteColor,
-            secondTextColor: whiteColor,
+            textColor: whiteColor,
           ),
           30.verticalSpace,
           CustomRegisterButton(
-            firstColor: secondaryColor,
-            secondColor: secondSecondaryColor,
+            color: secondSecondaryColor,
             title: 'save changes',
-            firstTextColor: whiteColor,
-            secondTextColor: whiteColor,
+            textColor: whiteColor,
           ),
         ],
       ),

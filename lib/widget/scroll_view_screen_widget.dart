@@ -1,8 +1,8 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
-import 'package:sports_app/core/constant/strings.dart';
 import 'package:sports_app/core/model/scroll_view.dart';
 
 class CustomTweetCardWidget extends StatelessWidget {
