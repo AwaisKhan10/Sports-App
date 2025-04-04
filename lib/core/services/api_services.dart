@@ -17,13 +17,13 @@ class ApiServices {
     // dio.options.headers['Content-Type'] = 'application/json';
     print("userId => $userID");
     print("accessToken => $accessToken");
-    dio.options.headers["content-type"] = 'application/json';
-    dio.options.headers["x-api-channel"] = 'fitnessgym-app';
-    dio.options.headers["x-request-id"] = '$userID';
-    dio.options.headers["id"] = '$userID';
-    dio.options.headers["userId"] = '$userID';
-    dio.options.headers["trainerId"] = '$userID';
-    dio.options.headers["Authorization"] = 'Bearer $accessToken';
+    dio.options.headers["content-type"] = 'application/x-www-form-urlencoded';
+    // dio.options.headers["x-api-channel"] = 'fitnessgym-app';
+    // dio.options.headers["x-request-id"] = '$userID';
+    // dio.options.headers["id"] = '$userID';
+    // dio.options.headers["userId"] = '$userID';
+    // dio.options.headers["trainerId"] = '$userID';
+    // dio.options.headers["Authorization"] = 'Bearer $accessToken';
 
     dio.options.followRedirects = false;
     dio.options.validateStatus = (s) {

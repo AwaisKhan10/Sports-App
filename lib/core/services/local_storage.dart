@@ -1,88 +1,51 @@
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sports_app/core/model/app_user.dart';
 
 class LocalStorageService {
-  // static LocalStorageService? _instance;
-  static SharedPreferences? _preferences;
+  static const String _userIdKey = 'user_id';
+  static const String _userKey = 'user';
+  static const String _accessTokenKey = 'access_token';
+  static const String _isClientKey = 'isClient';
+  static const String _emailKey = 'email';
 
-  ///
-  /// List of const keys
-  ///
-  static const String onboardingCountKey = 'onBoardingCount';
-  static const String notificationsCountKey = 'snotificationsCount';
-  static const String accessTokenKey = 'accessToken';
-  static const String refreshTokenKey = 'refreshToken';
-  static const String userIdKey = 'userId';
-  static const String isClientKey = 'isClient';
-  static const String emailKey = 'email';
+  late final SharedPreferences _prefs;
 
-  ///
-  /// Setters and getters
-  ///
-  int get onBoardingPageCount => _getFromDisk(onboardingCountKey) ?? 0;
-  set onBoardingPageCount(int count) => _saveToDisk(onboardingCountKey, count);
+  LocalStorageService() {
+    init();
+  }
 
-  int get setNotificationsCount => _getFromDisk(notificationsCountKey) ?? 0;
-  set setNotificationsCount(int count) =>
-      _saveToDisk(notificationsCountKey, count);
-
-  dynamic get accessToken => _getFromDisk(accessTokenKey) ?? null;
-  set accessToken(token) => _saveToDisk(accessTokenKey, token);
-
-  dynamic get refreshToken => _getFromDisk(refreshTokenKey) ?? null;
-  set refreshToken(token) => _saveToDisk(refreshTokenKey, token);
-
-  dynamic get userId => _getFromDisk(userIdKey) ?? null;
-  set userId(token) => _saveToDisk(userIdKey, token);
-
-  dynamic get email => _getFromDisk(emailKey) ?? null;
-  set email(token) => _saveToDisk(emailKey, token);
-
-  bool get isClient => _getFromDisk(isClientKey) ?? false;
-  set isClient(token) => _saveToDisk(isClientKey, token);
-  ////
-  ///initializing instance
-  ///
   init() async {
-    _preferences = await SharedPreferences.getInstance();
+    _prefs = await SharedPreferences.getInstance();
   }
 
-  dynamic _getFromDisk(String key) {
-    var value = _preferences!.get(key);
-    print('(TRACE) LocalStorageService:_getFromDisk. key: $key value: $value');
-    return value;
+  // User ID
+  String? get userId => _prefs.getString(_userIdKey);
+  Future<void> setUserId(String value) => _prefs.setString(_userIdKey, value);
+
+  // User object
+  AppUser? get user {
+    final userStr = _prefs.getString(_userKey);
+    if (userStr == null) return null;
+    return AppUser.fromJson(json.decode(userStr));
   }
 
-  void _saveToDisk<T>(String key, T? content) {
-    print('(TRACE) LocalStorageService:_saveToDisk. key: $key value: $content');
+  Future<void> setUser(AppUser user) =>
+      _prefs.setString(_userKey, json.encode(user.toJson()));
 
-    if (content is String) {
-      _preferences!.setString(key, content);
-    }
-    if (content is bool) {
-      _preferences!.setBool(key, content);
-    }
-    if (content is int) {
-      _preferences!.setInt(key, content);
-    }
-    if (content is double) {
-      _preferences!.setDouble(key, content);
-    }
-    if (content is List<String>) {
-      _preferences!.setStringList(key, content);
-    }
+  // Access token
+  String? get accessToken => _prefs.getString(_accessTokenKey);
+  Future<void> setAccessToken(String value) =>
+      _prefs.setString(_accessTokenKey, value);
 
-    if (content == null) {
-      _preferences!.remove(key);
-    }
-  }
+  // Client flag
+  bool get isClient => _prefs.getBool(_isClientKey) ?? false;
+  Future<void> setIsClient(bool value) => _prefs.setBool(_isClientKey, value);
 
-  // static Future<LocalStorageService> getInstance() async {
-  //   if (_instance == null) {
-  //     _instance = LocalStorageService();
-  //   }
-  //   if (_preferences == null) {
-  //     _preferences = await SharedPreferences.getInstance();
-  //   }
-  //   return _instance!;
-  // }
+  // Email
+  String? get email => _prefs.getString(_emailKey);
+  Future<void> setEmail(String value) => _prefs.setString(_emailKey, value);
+
+  // Clear all data
+  Future<void> clearAll() => _prefs.clear();
 }

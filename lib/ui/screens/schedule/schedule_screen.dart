@@ -1,45 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
-import 'package:sports_app/ui/screens/%20%20scroll_view/scroll_view_view_model.dart';
+import 'package:sports_app/ui/screens/schedule/schedule_view_model.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
-import 'package:sports_app/widget/scroll_view_show_upcoming.dart';
 
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: scaffoldColor,
-
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: CustomDropDownExpendableButton(
-                  text:
-                      'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+    return ChangeNotifierProvider(
+      create: (_) => ScheduleViewModel()..loadMatches(),
+      child: Consumer<ScheduleViewModel>(
+        builder:
+            (context, model, _) => Scaffold(
+              backgroundColor: scaffoldColor,
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: CustomDropDownExpendableButton(
+                          text:
+                              'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+                        ),
+                      ),
+                      Text('Show upcoming', style: style18),
+                      20.verticalSpace,
+                      if (model.isLoading)
+                        Center(child: CircularProgressIndicator())
+                      else if (model.error != null)
+                        Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                model.error!,
+                                style: TextStyle(color: Colors.red),
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed: model.loadMatches,
+                                child: Text('Retry'),
+                              ),
+                            ],
+                          ),
+                        )
+                      else if (model.matches.isEmpty)
+                        Center(
+                          child: Text('No upcoming matches', style: style18),
+                        )
+                      else
+                        ...model.matches.map((match) => _UpComingShow(match)),
+                      40.verticalSpace,
+                    ],
+                  ),
                 ),
               ),
-              Text('Show upcoming', style: style18),
-              20.verticalSpace,
-              _UpComingShow(ScrollViewViewModel()),
-              _UpComingShow(ScrollViewViewModel()),
-              _UpComingShow(ScrollViewViewModel()),
-              40.verticalSpace,
-            ],
-          ),
-        ),
+            ),
       ),
     );
   }
 
-  Widget _UpComingShow(ScrollViewViewModel model) {
+  Widget _UpComingShow(match) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,7 +86,10 @@ class ScheduleScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Monday, April 2, 2004', style: style16.copyWith()),
+                    Text(
+                      DateFormat('EEEE, MMMM d, yyyy').format(match.matchDate),
+                      style: style16,
+                    ),
                     Container(
                       height: 35.h,
                       width: 75.w,
@@ -68,31 +99,51 @@ class ScheduleScreen extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'Away',
+                          'Match',
                           style: style16.copyWith(color: whiteColor),
                         ),
                       ),
                     ),
                   ],
                 ),
-                if (model.showUpcomings.isNotEmpty) ...[
-                  CustomShowUpcomingWIdget(
-                    showUpcomingModelObject: model.showUpcomings[0],
-                  ),
-                  if (model.showUpcomings.length > 1)
-                    CustomShowUpcomingWIdget(
-                      showUpcomingModelObject: model.showUpcomings[1],
+                20.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        match.homeTeam,
+                        style: style18.copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.end,
+                      ),
                     ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Text(
+                        'VS',
+                        style: style16B.copyWith(color: primaryColor),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        match.awayTeam,
+                        style: style18.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
                 20.verticalSpace,
                 Row(
                   children: [
-                    Text("7:15 PM", style: style16B),
+                    Text(
+                      DateFormat('h:mm a').format(match.matchDate),
+                      style: style16B,
+                    ),
                     5.horizontalSpace,
                     Container(height: 16, width: 1.5, color: Colors.grey),
                     5.horizontalSpace,
                     Text(
-                      "Avaya Stadium",
+                      match.venue,
                       style: style16.copyWith(fontWeight: FontWeight.w400),
                     ),
                   ],

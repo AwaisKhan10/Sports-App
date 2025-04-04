@@ -47,8 +47,10 @@ dependencies:
   device_info_plus:
   image_picker:
   logger:
-  heic_to_jpg:
   file_picker: 
+  google_sign_in: ^6.3.0
+  sign_in_with_apple: ^6.1.4
+  timeago: ^3.2.2
 
 
 dev_dependencies:

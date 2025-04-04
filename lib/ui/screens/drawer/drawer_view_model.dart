@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sports_app/ui/screens/%20%20scroll_view/%20%20scroll_view_screen.dart'
+import 'package:sports_app/ui/screens/scroll_view/scroll_view_screen.dart'
     show ScrollViewScreen;
 import 'package:sports_app/ui/screens/%20%20ticketing/%20%20ticketing_screen.dart';
 import 'package:sports_app/ui/screens/%20Info_support/%20Info_support_screen.dart';

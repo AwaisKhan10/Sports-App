@@ -8,48 +8,68 @@ import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/auth/register/register_screen.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_view_model.dart';
-import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/line_withText.dart';
 import 'package:sports_app/widget/register_button.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _emailFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SignInViewModel(),
       child: Consumer<SignInViewModel>(
         builder:
-            (context, model, child) => Scaffold(
-              backgroundColor: scaffoldColor,
-
-              ///
-              /// Start App Bar
-              ///
-              appBar: AppBar(
-                backgroundColor: whiteColor,
-                centerTitle: true,
-                title: Text(
-                  'SignIn',
-                  style: style20B.copyWith(color: blackColor, fontSize: 22.sp),
-                ),
-              ),
-
-              ///
-              /// Start Body
-              ///
-              body: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CustomDropDownExpendableButton(
-                      text:
-                          'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+            (context, model, child) => GestureDetector(
+              onTap: () {
+                // Dismiss keyboard when tapping outside
+                FocusScope.of(context).unfocus();
+              },
+              child: Scaffold(
+                backgroundColor: scaffoldColor,
+                appBar: AppBar(
+                  backgroundColor: whiteColor,
+                  centerTitle: true,
+                  title: Text(
+                    'Sign In',
+                    style: style20B.copyWith(
+                      color: blackColor,
+                      fontSize: 22.sp,
                     ),
-                    50.verticalSpace,
-                    _signInSection(context, model),
-                  ],
+                  ),
+                ),
+                body: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomDropDownExpendableButton(
+                        text:
+                            'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+                      ),
+                      50.verticalSpace,
+                      _signInSection(context, model),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -61,62 +81,97 @@ class SignInScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Form(
-        key: model.formKey,
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Welcome to App', style: style25B.copyWith()),
+            Text('Welcome to App', style: style25B),
             10.verticalSpace,
             Text(
               'Creating a profile and signing will allow you \n to use app',
-              style: style18.copyWith(),
+              style: style18,
             ),
             20.verticalSpace,
+            if (model.error != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: Text(model.error!, style: TextStyle(color: Colors.red)),
+              ),
             TextFormField(
+              controller: _emailController,
+              focusNode: _emailFocusNode,
               decoration: authFieldDecoration.copyWith(hintText: 'Email'),
-              onChanged: (value) {
-                model.updateEmail(value);
-                model.formKey.currentState?.validate();
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_passwordFocusNode);
               },
-              validator: model.validateEmail,
+              validator:
+                  (value) =>
+                      value == null || value.isEmpty
+                          ? 'Email is required'
+                          : !RegExp(
+                            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                          ).hasMatch(value)
+                          ? 'Enter a valid email'
+                          : null,
             ),
             20.verticalSpace,
             TextFormField(
+              controller: _passwordController,
+              focusNode: _passwordFocusNode,
               obscureText: true,
               decoration: authFieldDecoration.copyWith(hintText: 'Password'),
-              onChanged: (value) {
-                model.updatePassword(value);
-                model.formKey.currentState?.validate();
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) {
+                if (_formKey.currentState?.validate() == true) {
+                  model.login(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                  );
+                }
               },
-              validator: model.validatePassword,
+              validator:
+                  (value) =>
+                      value == null || value.isEmpty
+                          ? 'Password is required'
+                          : value.length < 6
+                          ? 'Password must be at least 6 characters'
+                          : null,
             ),
             Align(
               alignment: Alignment.bottomRight,
               child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Forget your password?',
-                  style: style16B.copyWith(),
-                ),
+                onPressed: () {
+                  // TODO: Implement forgot password
+                },
+                child: Text('Forgot your password?', style: style16B),
               ),
             ),
             30.verticalSpace,
             CustomRegisterButton(
               onPressed:
-                  model.isFormValid
-                      ? () {
-                        if (model.formKey.currentState?.validate() ?? false) {
-                          Get.to(() => DrawerScreen());
+                  model.isLoading
+                      ? null
+                      : () {
+                        if (_formKey.currentState?.validate() == true) {
+                          model.login(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
                         }
-                      }
-                      : null,
-              title: 'Sign In with Email',
-              color: model.isFormValid ? primaryColor : lightRedColor,
-              textColor: model.isFormValid ? whiteColor : blackColor,
+                      },
+              title: model.isLoading ? 'Signing in...' : 'Sign In with Email',
+              color:
+                  model.isLoading
+                      ? primaryColor.withOpacity(0.5)
+                      : primaryColor,
+              textColor: whiteColor,
             ),
             20.verticalSpace,
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Don\'t have profile? ',
@@ -124,11 +179,9 @@ class SignInScreen extends StatelessWidget {
                 ),
                 3.horizontalSpace,
                 GestureDetector(
-                  onTap: () {
-                    Get.to(() => RegisterScreen());
-                  },
+                  onTap: () => Get.to(() => RegisterScreen()),
                   child: Text(
-                    'Create one now ',
+                    'Create one now',
                     style: style16.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -139,18 +192,28 @@ class SignInScreen extends StatelessWidget {
             40.verticalSpace,
             CustomRegisterButton(
               imageUrl: AppAssets().X,
-
-              title: 'Sign In with X',
+              title: 'Sign In with Google',
               color: blackColor,
               textColor: whiteColor,
+              onPressed:
+                  model.isLoading
+                      ? null
+                      : () async {
+                        await model.loginWithGoogle();
+                      },
             ),
             20.verticalSpace,
             CustomRegisterButton(
               imageUrl: AppAssets().linkedin,
-
               color: secondaryColor,
-              title: 'Sign In with Linkedin',
+              title: 'Sign In with Apple',
               textColor: whiteColor,
+              onPressed:
+                  model.isLoading
+                      ? null
+                      : () async {
+                        await model.loginWithApple();
+                      },
             ),
             40.verticalSpace,
           ],

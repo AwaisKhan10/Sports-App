@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:heic_to_jpg/heic_to_jpg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart' as p;
@@ -20,8 +19,6 @@ class FilePickerService {
   Future<File?> pickVideo() async {
     File? selectedVideo;
     final video = await _imagePicker.pickVideo(source: ImageSource.gallery);
-    // final image100 = await _imagePicker.pickImage(
-    //     source: ImageSource.gallery, imageQuality: 100);
     if (video != null) selectedVideo = File(video.path);
 
     return selectedVideo;
@@ -33,55 +30,48 @@ class FilePickerService {
       source: ImageSource.gallery,
       imageQuality: 40,
     );
-    // final image100 = await _imagePicker.pickImage(
-    //     source: ImageSource.gallery, imageQuality: 100);
     if (image50 != null) selectedImage = File(image50.path);
 
     log.d('Image50 Size: ${await image50?.length()}');
-    // log.d('Image100 Size: ${await image100?.length()}');
 
     return selectedImage;
   }
 
   pickImageWithoutCompression() async {
-    File? selectedImage;
-    final _filePicker = FilePicker.platform;
-    FilePickerResult? result = await _filePicker.pickFiles(
-      type: FileType.image,
-      allowMultiple: false,
-    );
+    try {
+      final XFile? pickedImage = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
 
-    if (result != null) {
-      selectedImage = File(result.paths.first!);
-      final extension = p.extension(selectedImage.path);
-      debugPrint('@FilePcikerService.pickImage ==> Extension: $extension');
+      if (pickedImage != null) {
+        final File selectedImage = File(pickedImage.path);
+        final extension = p.extension(selectedImage.path).toLowerCase();
 
-      if (extension == '.heic' ||
-          extension == '.jpg' ||
-          extension == '.jpeg' ||
-          extension == '.png' ||
-          extension == '.gif') {
-        if (extension == '.heic') {
-          String? jpegPath = await HeicToJpg.convert(selectedImage.path);
-          if (jpegPath != null) selectedImage = File(jpegPath);
+        if (extension == '.jpg' ||
+            extension == '.jpeg' ||
+            extension == '.png' ||
+            extension == '.gif' ||
+            extension == '.heic') {
+          return selectedImage;
+        } else {
+          Get.snackbar(
+            "Error!",
+            "Please select image only",
+            backgroundColor: blackColor,
+            colorText: whiteColor,
+          );
+          return null;
         }
-        return selectedImage;
-      } else {
-        Get.snackbar(
-          "Error!",
-          "Please select image only",
-          backgroundColor: blackColor,
-          colorText: whiteColor,
-        );
-        return null;
       }
-
-      // final dir = path_prvoider.getTemporaryDirectory();
-      // final newPath = '$dir/test.jpg';
-      // final compressedImage = await _compressImageFile(selectedImage, newPath);
-      // if (compressedImage != null) {
-      //   selectedImage = compressedImage;
-      // }
+    } catch (e) {
+      log.e('Error picking image: $e');
+      Get.snackbar(
+        "Error!",
+        "Failed to pick image",
+        backgroundColor: blackColor,
+        colorText: whiteColor,
+      );
+      return null;
     }
   }
 

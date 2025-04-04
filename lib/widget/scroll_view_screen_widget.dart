@@ -27,7 +27,7 @@ class CustomTweetCardWidget extends StatelessWidget {
               children: [
                 if (tweetObject.imageUrl != null)
                   CircleAvatar(
-                    backgroundImage: AssetImage(tweetObject.imageUrl!),
+                    backgroundImage: NetworkImage(tweetObject.imageUrl!),
                     radius: 30.r,
                   ),
                 SizedBox(width: 10.w),

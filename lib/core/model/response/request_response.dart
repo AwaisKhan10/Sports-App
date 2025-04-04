@@ -1,21 +1,19 @@
-class RequestResponse {
-  late bool success;
-  String? error;
-  late var data;
+class RequestResponse<T> {
+  final bool success;
+  final String? error;
+  final T? data;
 
-  RequestResponse(this.success, {this.error, this.data});
+  const RequestResponse(this.success, {this.error, this.data});
 
-  RequestResponse.fromJson(json) {
-    try {
-      this.data = json;
-      this.success = json.data["success"];
-      this.error = json.data['error'];
-    } catch (e) {
-      print("errorRequestResponse => $e");
-    }
+  factory RequestResponse.fromJson(Map<String, dynamic> json) {
+    return RequestResponse(
+      json['success'] as bool,
+      error: json['error'] as String?,
+      data: json['data'] as T?,
+    );
   }
 
-  toJson() {
-    return {'success': this.success, 'error': this.error, 'body': this.data};
+  Map<String, dynamic> toJson() {
+    return {'success': success, 'error': error, 'data': data};
   }
 }

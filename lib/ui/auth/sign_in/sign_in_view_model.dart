@@ -1,43 +1,85 @@
 import 'package:flutter/material.dart';
-import 'package:sports_app/core/others/base_view_model.dart';
+import 'package:get/get.dart';
+import 'package:sports_app/core/services/auth_services.dart';
+import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
+import 'package:sports_app/ui/screens/home/home_screen.dart';
 
-class SignInViewModel extends BaseViewModel {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+class SignInViewModel extends ChangeNotifier {
+  final _authService = AuthService();
+  bool _isLoading = false;
+  String? _error;
 
-  String _email = '';
-  String _password = '';
+  bool get isLoading => _isLoading;
+  String? get error => _error;
 
-  void updateEmail(String value) {
-    _email = value;
+  Future<void> login({required String email, required String password}) async {
+    _isLoading = true;
+    _error = null;
     notifyListeners();
+
+    try {
+      final result = await _authService.login(email: email, password: password);
+
+      if (result.success) {
+        // Navigate to home screen or dashboard
+        Get.offAll(
+          () => DrawerScreen(),
+        ); // Uncomment and import your home screen
+      } else {
+        _error = result.error ?? 'Login failed';
+      }
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
-  void updatePassword(String value) {
-    _password = value;
+  Future<void> loginWithGoogle() async {
+    _isLoading = true;
+    _error = null;
     notifyListeners();
-  }
 
-  bool get isFormValid {
-    return formKey.currentState?.validate() ?? false;
-  }
+    try {
+      final result = await _authService.loginWithGoogle();
 
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your email';
-    } else if (!RegExp(
-      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-    ).hasMatch(value)) {
-      return 'Please enter a valid email';
+      if (result.success) {
+        Get.offAll(() => DrawerScreen());
+      } else {
+        _error = result.error ?? 'Google login failed';
+      }
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-    return null;
   }
 
-  String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your password';
-    } else if (value.length < 6) {
-      return 'Password must be at least 6 characters';
+  Future<void> loginWithApple() async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      final result = await _authService.loginWithApple();
+
+      if (result.success) {
+        Get.offAll(() => DrawerScreen());
+      } else {
+        _error = result.error ?? 'Apple login failed';
+      }
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-    return null;
+  }
+
+  void clearError() {
+    _error = null;
+    notifyListeners();
   }
 }
