@@ -41,6 +41,15 @@ dependencies:
   path_provider:
   change_app_package_name:
   reels_viewer:
+  dio: 
+  shared_preferences:
+  get_it:
+  device_info_plus:
+  image_picker:
+  logger:
+  heic_to_jpg:
+  file_picker: 
+
 
 dev_dependencies:
   flutter_test:
