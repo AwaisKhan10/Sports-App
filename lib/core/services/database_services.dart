@@ -5,6 +5,8 @@ import 'package:sports_app/core/model/match.dart';
 import 'package:sports_app/core/model/post.dart';
 import 'package:sports_app/core/model/response/request_response.dart';
 import 'package:sports_app/core/model/team_model.dart';
+import 'package:sports_app/core/model/team_player.dart';
+import 'package:sports_app/core/model/team_staff.dart';
 import 'package:sports_app/core/services/api_services.dart';
 
 class DatabaseServices {
@@ -87,7 +89,7 @@ class DatabaseServices {
   /// Get teams using ApiServices.get
   Future<RequestResponse<List<TeamModel>>> getTeams() async {
     try {
-      final response = await _apiService.get(url: EndPoints.teamApi);
+      final response = await _apiService.get(url: EndPoints.getTeams);
 
       if (response.success) {
         final data = response.data;
@@ -100,6 +102,68 @@ class DatabaseServices {
           return RequestResponse(true, data: teams);
         } else {
           return RequestResponse(false, error: 'Failed to load teams');
+        }
+      } else {
+        return RequestResponse(false, error: response.error);
+      }
+    } catch (e) {
+      return RequestResponse(false, error: e.toString());
+    }
+  }
+
+  /// Get team players using ApiServices.get
+  Future<RequestResponse<List<TeamPlayerModel>>> getTeamPlayers(
+    int teamId,
+  ) async {
+    try {
+      final response = await _apiService.get(
+        url: "${EndPoints.getTeamPlayers}&team_id=$teamId",
+      );
+
+      if (response.success) {
+        final data = response.data;
+        if (data['status'] == true) {
+          List<dynamic> playersJson = data['players'];
+          final players =
+              playersJson
+                  .map((playerJson) => TeamPlayerModel.fromJson(playerJson))
+                  .toList();
+          return RequestResponse(true, data: players);
+        } else {
+          return RequestResponse(
+            false,
+            error: data['message'] ?? 'Failed to load team players',
+          );
+        }
+      } else {
+        return RequestResponse(false, error: response.error);
+      }
+    } catch (e) {
+      return RequestResponse(false, error: e.toString());
+    }
+  }
+
+  /// Get team staff using ApiServices.get
+  Future<RequestResponse<List<TeamStaffModel>>> getTeamStaff(int teamId) async {
+    try {
+      final response = await _apiService.get(
+        url: "${EndPoints.getTeamStaff}&team_id=$teamId",
+      );
+
+      if (response.success) {
+        final data = response.data;
+        if (data['status'] == true) {
+          List<dynamic> staffJson = data['staff'];
+          final staff =
+              staffJson
+                  .map((staffJson) => TeamStaffModel.fromJson(staffJson))
+                  .toList();
+          return RequestResponse(true, data: staff);
+        } else {
+          return RequestResponse(
+            false,
+            error: data['message'] ?? 'Failed to load team staff',
+          );
         }
       } else {
         return RequestResponse(false, error: response.error);

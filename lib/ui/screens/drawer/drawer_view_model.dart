@@ -13,7 +13,8 @@ import 'package:sports_app/ui/screens/notification/notification_screen.dart';
 import 'package:sports_app/ui/screens/parking/parking_screen.dart';
 import 'package:sports_app/ui/screens/schedule/schedule_screen.dart';
 import 'package:sports_app/ui/screens/stadium_information/stadium_info_screen.dart';
-import 'package:sports_app/ui/screens/the_team/team_screen.dart';
+import 'package:sports_app/ui/screens/the_team/team/team_screen.dart';
+import 'package:sports_app/ui/screens/the_team/the_team_screen.dart';
 
 class DrawerScreenViewModel extends ChangeNotifier {
   int _selectedIndex = 0; // Default screen index
@@ -40,7 +41,7 @@ class DrawerScreenViewModel extends ChangeNotifier {
     TicketingScreen(),
     ParkingScreen(),
     ScheduleScreen(),
-    TheTeamScreen(),
+    TeamScreen(),
     NotificationScreen(),
     FanEngagementScreen(),
     StadiumInformationScreen(),

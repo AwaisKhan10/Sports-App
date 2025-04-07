@@ -17,5 +17,8 @@ class EndPoints {
   static const String commentPost = "$extendedApi?action=comment_post";
 
   // Team API endpoints
-  static const String teamApi = "${baseUrl}teams_api.php?action=get_teams";
+  static const String teamApi = "${baseUrl}teams_api.php";
+  static const String getTeams = "$teamApi?action=get_teams";
+  static const String getTeamPlayers = "$teamApi?action=get_team_players";
+  static const String getTeamStaff = "$teamApi?action=get_team_staff";
 }
