@@ -1,8 +1,10 @@
+import 'package:http/http.dart';
 import 'package:sports_app/core/constant/api_end_points.dart';
 import 'package:sports_app/core/model/comment.dart';
 import 'package:sports_app/core/model/match.dart';
 import 'package:sports_app/core/model/post.dart';
 import 'package:sports_app/core/model/response/request_response.dart';
+import 'package:sports_app/core/model/team_model.dart';
 import 'package:sports_app/core/services/api_services.dart';
 
 class DatabaseServices {
@@ -74,6 +76,31 @@ class DatabaseServices {
       if (response.success) {
         final commentId = response.data['data']['comment_id'].toString();
         return RequestResponse(true, data: commentId);
+      } else {
+        return RequestResponse(false, error: response.error);
+      }
+    } catch (e) {
+      return RequestResponse(false, error: e.toString());
+    }
+  }
+
+  /// Get teams using ApiServices.get
+  Future<RequestResponse<List<TeamModel>>> getTeams() async {
+    try {
+      final response = await _apiService.get(url: EndPoints.teamApi);
+
+      if (response.success) {
+        final data = response.data;
+        if (data['status'] == true) {
+          List<dynamic> teamsJson = data['teams'];
+          final teams =
+              teamsJson
+                  .map((teamJson) => TeamModel.fromJson(teamJson))
+                  .toList();
+          return RequestResponse(true, data: teams);
+        } else {
+          return RequestResponse(false, error: 'Failed to load teams');
+        }
       } else {
         return RequestResponse(false, error: response.error);
       }

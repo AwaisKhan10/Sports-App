@@ -15,4 +15,7 @@ class EndPoints {
   static const String allPosts = "$extendedApi?action=all_posts";
   static const String getMatches = "$extendedApi?action=get_matches";
   static const String commentPost = "$extendedApi?action=comment_post";
+
+  // Team API endpoints
+  static const String teamApi = "${baseUrl}teams_api.php?action=get_teams";
 }

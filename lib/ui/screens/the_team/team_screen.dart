@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/colors.dart';
-import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/the_team/player_profile.dart';
 import 'package:sports_app/ui/screens/the_team/team_view_model.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
