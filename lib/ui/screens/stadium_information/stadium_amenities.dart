@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
@@ -12,7 +11,6 @@ import 'package:sports_app/ui/screens/stadium_information/stadium_info_view_mode
 import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/filter_button.dart';
-import 'package:sports_app/widget/header.dart';
 
 class StadiumInfoAmenitiesScreen extends StatefulWidget {
   const StadiumInfoAmenitiesScreen({super.key});

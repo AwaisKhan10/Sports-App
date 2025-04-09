@@ -7,9 +7,9 @@ import 'package:sports_app/locator.dart';
 import 'package:sports_app/ui/screens/scroll_view/scroll_view_view_model.dart';
 import 'package:sports_app/ui/screens/splash/splash_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupLocator();
+  await setupLocator();
   runApp(const MyApp());
 }
 

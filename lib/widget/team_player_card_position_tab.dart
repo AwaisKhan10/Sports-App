@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
-import 'package:sports_app/core/model/team_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class CustomTeamPlayerPositionCard extends StatelessWidget {

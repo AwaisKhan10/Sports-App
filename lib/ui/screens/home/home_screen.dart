@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
-import 'package:sports_app/ui/screens/home/home_screen_view_model.dart';
+import 'package:sports_app/ui/screens/home/home_view_model.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
-import 'package:sports_app/widget/home_social_media_button.dart';
+import 'package:sports_app/widget/buttons/home_social_media_button.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<Map<String, dynamic>> socialMediaIcons = [

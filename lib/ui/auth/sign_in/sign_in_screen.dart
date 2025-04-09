@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
@@ -8,9 +10,10 @@ import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/auth/register/register_screen.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_view_model.dart';
+import 'package:sports_app/widget/buttons/custom_button.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/line_withText.dart';
-import 'package:sports_app/widget/register_button.dart';
+import 'package:sports_app/widget/buttons/register_button.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -41,11 +44,14 @@ class _SignInScreenState extends State<SignInScreen> {
         builder:
             (context, model, child) => GestureDetector(
               onTap: () {
-                // Dismiss keyboard when tapping outside
                 FocusScope.of(context).unfocus();
               },
               child: Scaffold(
-                backgroundColor: scaffoldColor,
+                backgroundColor: whiteColor,
+
+                ///
+                /// Start AppBar
+                ///
                 appBar: AppBar(
                   backgroundColor: whiteColor,
                   centerTitle: true,
@@ -57,16 +63,27 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
+
+                ///
+                /// Start Body
+                ///
                 body: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      ///
+                      /// Drop Down
+                      ///
                       CustomDropDownExpendableButton(
                         text:
                             'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
                       ),
                       50.verticalSpace,
+
+                      ///
+                      /// SignIn Section
+                      ///
                       _signInSection(context, model),
                     ],
                   ),
@@ -77,6 +94,9 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
+  ///
+  /// SignIn Section
+  ///
   Widget _signInSection(BuildContext context, SignInViewModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -93,17 +113,17 @@ class _SignInScreenState extends State<SignInScreen> {
               style: style18,
             ),
             20.verticalSpace,
-            if (model.error != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: Text(model.error!, style: TextStyle(color: Colors.red)),
-              ),
+
+            ///
+            /// Email
+            ///
             TextFormField(
               controller: _emailController,
               focusNode: _emailFocusNode,
               decoration: authFieldDecoration.copyWith(hintText: 'Email'),
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
+              onChanged: model.updateEmail,
               onFieldSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_passwordFocusNode);
               },
@@ -118,20 +138,24 @@ class _SignInScreenState extends State<SignInScreen> {
                           : null,
             ),
             20.verticalSpace,
+
+            ///
+            /// Password
+            ///
             TextFormField(
               controller: _passwordController,
               focusNode: _passwordFocusNode,
-              obscureText: true,
-              decoration: authFieldDecoration.copyWith(hintText: 'Password'),
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (_) {
-                if (_formKey.currentState?.validate() == true) {
-                  model.login(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  );
-                }
-              },
+              obscureText: model.visible,
+              onChanged: model.updatePassword,
+              decoration: authFieldDecoration.copyWith(
+                hintText: 'Password',
+                suffixIcon: IconButton(
+                  onPressed: model.toogleVisiblity,
+                  icon: Icon(
+                    model.visible ? Icons.visibility_off : Icons.visibility,
+                  ),
+                ),
+              ),
               validator:
                   (value) =>
                       value == null || value.isEmpty
@@ -140,6 +164,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           ? 'Password must be at least 6 characters'
                           : null,
             ),
+
+            ///
+            /// Forgot Password
+            ///
             Align(
               alignment: Alignment.bottomRight,
               child: TextButton(
@@ -150,9 +178,13 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
             30.verticalSpace,
-            CustomRegisterButton(
+
+            ///
+            /// SignIn Button
+            ///
+            CustomButton(
               onPressed:
-                  model.isLoading
+                  model.isLoading || !model.isFormValid
                       ? null
                       : () {
                         if (_formKey.currentState?.validate() == true) {
@@ -164,12 +196,19 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
               title: model.isLoading ? 'Signing in...' : 'Sign In with Email',
               color:
-                  model.isLoading
-                      ? primaryColor.withOpacity(0.5)
+                  (model.isLoading || !model.isFormValid)
+                      ? primaryColor.withOpacity(0.50)
                       : primaryColor,
-              textColor: whiteColor,
+              textColor:
+                  (model.isLoading || !model.isFormValid)
+                      ? blackColor
+                      : whiteColor,
             ),
             20.verticalSpace,
+
+            ///
+            /// Donot Have Account
+            ///
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -190,8 +229,12 @@ class _SignInScreenState extends State<SignInScreen> {
             40.verticalSpace,
             CustomLineWithText(text: 'or continue with', lineWidth: 120.w),
             40.verticalSpace,
+
+            ///
+            /// Google Button
+            ///
             CustomRegisterButton(
-              imageUrl: AppAssets().X,
+              imageUrl: AppAssets().google,
               title: 'Sign In with Google',
               color: blackColor,
               textColor: whiteColor,
@@ -203,8 +246,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
             ),
             20.verticalSpace,
+
+            ///
+            /// Apple Button
+            ///
             CustomRegisterButton(
-              imageUrl: AppAssets().linkedin,
+              imageUrl: AppAssets().apple,
               color: secondaryColor,
               title: 'Sign In with Apple',
               textColor: whiteColor,

@@ -1,9 +1,11 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sports_app/core/constant/colors.dart';
+import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/the_team/the_team_screen.dart';
-import 'package:sports_app/core/model/team_player.dart';
 import 'package:sports_app/core/model/team_staff.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -33,6 +35,7 @@ class TeamScreen extends StatelessWidget {
                   text:
                       'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
                 ),
+                16.verticalSpace,
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: viewModel.teams.length,
@@ -50,8 +53,8 @@ class TeamScreen extends StatelessWidget {
                             team.teamLogo.isNotEmpty
                                 ? CachedNetworkImage(
                                   imageUrl: team.teamLogo,
-                                  width: 50.w,
-                                  height: 50.h,
+                                  width: 60.w,
+                                  height: 60.h,
                                   placeholder:
                                       (context, url) => Center(
                                         child: CircularProgressIndicator(
@@ -60,14 +63,10 @@ class TeamScreen extends StatelessWidget {
                                       ),
                                   errorWidget:
                                       (context, url, error) =>
-                                          Icon(Icons.error),
+                                          Icon(Icons.person),
                                 )
-                                : Icon(Icons.error),
-                        title: Text(team.teamName),
-                        subtitle:
-                            team.logo.isEmpty
-                                ? Text("No logo")
-                                : Text("Logo available"),
+                                : Icon(Icons.person),
+                        title: Text(team.teamName, style: style18),
 
                         onTap: () {
                           Navigator.push(
@@ -92,90 +91,6 @@ class TeamScreen extends StatelessWidget {
       ),
     );
   }
-
-  // Widget _buildTeamDetails(
-  //   BuildContext context,
-  //   TeamViewModel viewModel,
-  //   int teamId,
-  // ) {
-  //   return FutureBuilder(
-  //     future: Future.wait([
-  //       viewModel.fetchTeamPlayers(teamId),
-  //       viewModel.fetchTeamStaff(teamId),
-  //     ]),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.connectionState == ConnectionState.waiting) {
-  //         return Padding(
-  //           padding: EdgeInsets.all(16.r),
-  //           child: Center(child: CircularProgressIndicator()),
-  //         );
-  //       }
-
-  //       return Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           if (viewModel.players.isNotEmpty) ...[
-  //             Padding(
-  //               padding: EdgeInsets.all(16.r),
-  //               child: Text(
-  //                 'Players',
-  //                 style: TextStyle(
-  //                   fontSize: 18.sp,
-  //                   fontWeight: FontWeight.bold,
-  //                 ),
-  //               ),
-  //             ),
-  //             _buildPlayersList(context, viewModel.players),
-  //           ],
-  //           if (viewModel.staff.isNotEmpty) ...[
-  //             Padding(
-  //               padding: EdgeInsets.all(16.r),
-  //               child: Text(
-  //                 'Staff',
-  //                 style: TextStyle(
-  //                   fontSize: 18.sp,
-  //                   fontWeight: FontWeight.bold,
-  //                 ),
-  //               ),
-  //             ),
-  //             _buildStaffList(viewModel.staff),
-  //           ],
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
-  // Widget _buildPlayersList(
-  //   BuildContext context,
-  //   List<TeamPlayerModel> players,
-  // ) {
-  //   return ListView.builder(
-  //     shrinkWrap: true,
-  //     physics: NeverScrollableScrollPhysics(),
-  //     itemCount: players.length,
-  //     itemBuilder: (context, index) {
-  //       final player = players[index];
-  //       return ListTile(
-  //         leading: CircleAvatar(
-  //           backgroundImage: NetworkImage(player.profileImage),
-  //           onBackgroundImageError:
-  //               (exception, stackTrace) => Icon(Icons.person),
-  //         ),
-  //         title: Text(player.name),
-  //         subtitle: Text('${player.number} - ${player.position}'),
-  //         onTap: () {
-  //           Navigator.push(
-  //             context,
-  //             MaterialPageRoute(
-  //               builder: (context) => PlayerProfileScreen(player: player),
-  //             ),
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
 
   Widget _buildStaffList(List<TeamStaffModel> staffList) {
     return ListView.builder(

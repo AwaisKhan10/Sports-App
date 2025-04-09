@@ -32,7 +32,7 @@ class TeamViewModel extends BaseViewModel {
         _teams = response.data!; // Successfully fetched teams
         _errorMessage = '';
       } else {
-        _errorMessage = response.error ?? 'Failed to fetch teams';
+        _errorMessage = response.message ?? 'Failed to fetch teams';
       }
     } catch (e) {
       _errorMessage = e.toString(); // Handle any unexpected errors
@@ -54,7 +54,7 @@ class TeamViewModel extends BaseViewModel {
         _players = response.data!;
         _errorMessage = '';
       } else {
-        _errorMessage = response.error ?? 'Failed to fetch team players';
+        _errorMessage = response.message ?? 'Failed to fetch team players';
       }
     } catch (e) {
       _errorMessage = e.toString();
@@ -77,7 +77,7 @@ class TeamViewModel extends BaseViewModel {
         _staff = response.data!;
         _errorMessage = '';
       } else {
-        _errorMessage = response.error ?? 'Failed to fetch team staff';
+        _errorMessage = response.message ?? 'Failed to fetch team staff';
       }
     } catch (e) {
       _errorMessage = e.toString();

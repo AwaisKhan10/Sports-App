@@ -1,19 +1,20 @@
 class RequestResponse<T> {
   final bool success;
-  final String? error;
+  final String? message;
   final T? data;
 
-  const RequestResponse(this.success, {this.error, this.data});
+  const RequestResponse(this.success, {this.message, this.data});
 
   factory RequestResponse.fromJson(Map<String, dynamic> json) {
+    final isSuccess = json['status'] == 'success'; // Convert string to bool
     return RequestResponse(
-      json['success'] as bool,
-      error: json['error'] as String?,
-      data: json['data'] as T?,
+      isSuccess,
+      message: json['message'],
+      data: json['data'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'success': success, 'error': error, 'data': data};
+    return {'success': success, 'message': message, 'data': data};
   }
 }

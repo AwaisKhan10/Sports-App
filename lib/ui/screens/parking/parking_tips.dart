@@ -6,7 +6,6 @@ import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/screens/parking/map.dart';
 import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/direction_form_my_location.dart';
-import 'package:sports_app/widget/header.dart';
 
 class ParkingTipsScreen extends StatelessWidget {
   const ParkingTipsScreen({super.key});

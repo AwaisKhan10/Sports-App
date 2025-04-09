@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
+import 'package:sports_app/core/services/auth_services.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_view_model.dart';
 
@@ -17,6 +18,7 @@ class DrawerScreen extends StatelessWidget {
       create: (context) => DrawerScreenViewModel(),
       child: Consumer<DrawerScreenViewModel>(
         builder: (context, model, child) {
+          print("name: ${model.authservices.appUser.toJson()}");
           return Scaffold(
             backgroundColor: scaffoldColor,
             appBar: AppBar(
@@ -28,7 +30,9 @@ class DrawerScreen extends StatelessWidget {
               shadowColor: scaffoldColor,
               surfaceTintColor: scaffoldColor,
             ),
-            drawer: CustomDrawer(), // Use the custom drawer here
+            drawer: CustomDrawer(
+              authServices: model.authservices,
+            ), // Use the custom drawer here
             body:
                 model.currentScreen, // Directly use ViewModel’s selected screen
           );
@@ -40,6 +44,8 @@ class DrawerScreen extends StatelessWidget {
 
 // custom drawer
 class CustomDrawer extends StatelessWidget {
+  final AuthService authServices;
+  CustomDrawer({required this.authServices});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -59,7 +65,7 @@ class CustomDrawer extends StatelessWidget {
                   child: Icon(Icons.person, size: 40, color: Colors.black),
                 ),
                 title: Text(
-                  "Hello Guest",
+                  "Hello ${authServices.appUser.firstName}",
                   style: style20.copyWith(color: Colors.white, fontSize: 18),
                 ),
 

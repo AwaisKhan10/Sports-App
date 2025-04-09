@@ -5,7 +5,6 @@ import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/core/model/ticket.dart';
 import 'package:sports_app/widget/custom_app_bar.dart';
-import 'package:sports_app/widget/header.dart';
 import 'package:sports_app/widget/main_tickt_screen_card.dart';
 
 class GuestServicesScreen extends StatelessWidget {

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/get_core.dart';
 import 'package:get/route_manager.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
-import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/core/model/ticket.dart';
 import 'package:sports_app/ui/screens/stadium_information/stadium_amenities.dart';

@@ -8,7 +8,7 @@ import 'package:sports_app/ui/screens/profile/profile_view_model.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
 import 'package:sports_app/widget/header.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sports_app/widget/register_button.dart';
+import 'package:sports_app/widget/buttons/register_button.dart';
 import 'package:sports_app/widget/switch_button.dart';
 
 class ProfileScreen extends StatefulWidget {

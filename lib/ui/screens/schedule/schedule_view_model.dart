@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sports_app/core/model/match.dart';
 import 'package:sports_app/core/services/database_services.dart';
+import 'package:sports_app/locator.dart';
 
 class ScheduleViewModel extends ChangeNotifier {
-  final _databaseService = DatabaseServices();
+  final _databaseService = locator<DatabaseServices>();
 
   bool _isLoading = false;
   String? _error;
-  List<Match> _matches = [];
+  List<Matches> _matches = [];
 
   bool get isLoading => _isLoading;
   String? get error => _error;
-  List<Match> get matches => _matches;
+  List<Matches> get matches => _matches;
 
   Future<void> loadMatches() async {
     _isLoading = true;
@@ -20,10 +21,13 @@ class ScheduleViewModel extends ChangeNotifier {
 
     try {
       final result = await _databaseService.getMatches();
+      print(
+        result.data,
+      ); // Add this line to see what data is returned from the API.
       if (result.success) {
-        _matches = result.data ?? [];
+        _matches = (result.data!);
       } else {
-        _error = result.error ?? 'Failed to load matches';
+        _error = result.message ?? 'Failed to load matches';
       }
     } catch (e) {
       _error = e.toString();

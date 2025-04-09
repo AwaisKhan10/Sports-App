@@ -10,6 +10,8 @@ class AppAssets {
   String dp = "$staticAssets/dp.png";
   String linkedin = "$iconsAssets/linkedin.png";
   String X = "$iconsAssets/X.png";
+  String google = "$iconsAssets/google.png";
+  String apple = "$iconsAssets/apple.png";
 
   ///
   ///     drawer icons
@@ -57,4 +59,5 @@ class AppAssets {
   String tShirt = "$iconsAssets/tShirt.png";
   String downloadIcon = "$iconsAssets/downloadIcon.png";
   String wallIcon = "$iconsAssets/wall.png";
+  String comment = "$iconsAssets/comment.png";
 }

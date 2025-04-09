@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sports_app/core/services/auth_services.dart';
+import 'package:sports_app/locator.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
 
@@ -12,7 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final _authService = AuthService();
+  final _authService = locator<AuthService>();
 
   @override
   void initState() {

@@ -1,4 +1,3 @@
-import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/model/team_player.dart';
 import 'package:sports_app/core/model/team_staff.dart';
 import 'package:sports_app/core/others/base_view_model.dart';
@@ -27,7 +26,7 @@ class TheTeamViewModel extends BaseViewModel {
         _playersList = response.data!;
         _errorMessage = '';
       } else {
-        _errorMessage = response.error ?? 'Failed to fetch team players';
+        _errorMessage = response.message ?? 'Failed to fetch team players';
       }
     } catch (e) {
       _errorMessage = e.toString();
@@ -47,7 +46,7 @@ class TheTeamViewModel extends BaseViewModel {
         _staffList = response.data!;
         _errorMessage = '';
       } else {
-        _errorMessage = response.error ?? 'Failed to fetch Staff Members';
+        _errorMessage = response.message ?? 'Failed to fetch Staff Members';
       }
     } catch (e) {
       _errorMessage = e.toString();

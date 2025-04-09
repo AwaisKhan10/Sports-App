@@ -1,6 +1,4 @@
-import 'package:http/http.dart';
 import 'package:sports_app/core/constant/api_end_points.dart';
-import 'package:sports_app/core/model/comment.dart';
 import 'package:sports_app/core/model/match.dart';
 import 'package:sports_app/core/model/post.dart';
 import 'package:sports_app/core/model/response/request_response.dart';
@@ -19,43 +17,98 @@ class DatabaseServices {
 
       if (response.success) {
         final data = response.data['data'];
+
+        // Ensure the 'posts' and 'matches' data exist and map them properly
         return RequestResponse(
           true,
           data: {
             'posts':
-                (data['posts'] as List)
-                    .map((post) => Post.fromJson(post))
-                    .toList(),
+                (data['posts'] as List?)?.map((post) {
+                  return Post.fromJson(post);
+                }).toList() ??
+                [],
             'matches':
-                (data['matches'] as List)
-                    .map((match) => Match.fromJson(match))
-                    .toList(),
+                (data['matches'] as List?)?.map((match) {
+                  return Matches.fromJson(match);
+                }).toList() ??
+                [],
           },
         );
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 
   /// Retrieve only match fixtures
-  Future<RequestResponse<List<Match>>> getMatches() async {
+  Future<RequestResponse<List<Matches>>> getMatches() async {
     try {
       final response = await _apiService.post(url: EndPoints.getMatches);
 
       if (response.success) {
         final matches =
             (response.data['data'] as List)
-                .map((match) => Match.fromJson(match))
+                .map((match) => Matches.fromJson(match))
                 .toList();
+        print("API Response: ${matches.toString()}");
+
         return RequestResponse(true, data: matches);
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
+    }
+  }
+
+  /// Like a post
+  Future<RequestResponse<String>> likePost({
+    required String userId,
+    required String postId,
+  }) async {
+    try {
+      final response = await _apiService.post(
+        url: EndPoints.likePost,
+        data: {'user_id': userId, 'post_id': postId},
+      );
+
+      if (response.success) {
+        final likeId = response.data['data']['like_id'].toString();
+        return RequestResponse(true, data: likeId);
+      } else {
+        return RequestResponse(
+          false,
+          message: response.error ?? 'Error liking post',
+        );
+      }
+    } catch (e) {
+      return RequestResponse(false, message: 'Error: ${e.toString()}');
+    }
+  }
+
+  Future<RequestResponse<String>> unLikePost({
+    required String userId,
+    required String postId,
+  }) async {
+    try {
+      final response = await _apiService.post(
+        url: EndPoints.unlikePost,
+        data: {'user_id': userId, 'post_id': postId},
+      );
+
+      if (response.success) {
+        // final likeId = response.data['data']['like_id'].toString();
+        return RequestResponse(true, data: null);
+      } else {
+        return RequestResponse(
+          false,
+          message: response.error ?? 'Error unliking post',
+        );
+      }
+    } catch (e) {
+      return RequestResponse(false, message: 'Error: ${e.toString()}');
     }
   }
 
@@ -79,10 +132,10 @@ class DatabaseServices {
         final commentId = response.data['data']['comment_id'].toString();
         return RequestResponse(true, data: commentId);
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 
@@ -101,13 +154,13 @@ class DatabaseServices {
                   .toList();
           return RequestResponse(true, data: teams);
         } else {
-          return RequestResponse(false, error: 'Failed to load teams');
+          return RequestResponse(false, message: 'Failed to load teams');
         }
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 
@@ -132,14 +185,14 @@ class DatabaseServices {
         } else {
           return RequestResponse(
             false,
-            error: data['message'] ?? 'Failed to load team players',
+            message: data['message'] ?? 'Failed to load team players',
           );
         }
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 
@@ -162,14 +215,14 @@ class DatabaseServices {
         } else {
           return RequestResponse(
             false,
-            error: data['message'] ?? 'Failed to load team staff',
+            message: data['message'] ?? 'Failed to load team staff',
           );
         }
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 }

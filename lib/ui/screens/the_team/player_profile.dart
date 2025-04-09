@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
+import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/core/model/team_player.dart';
 import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -267,28 +268,39 @@ class PlayerProfileScreen extends StatelessWidget {
   }
 
   Widget _buildStatBox(String value, String label, Color color) {
-    return Container(
-      height: 45.h,
-      width: 95.w,
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            value,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16.sp,
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 4),
+        alignment: Alignment.center,
+        height: 45.h,
+        width: 95.w,
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              value,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.sp,
+              ),
             ),
-          ),
-          SizedBox(width: 5.w),
-          Text(label, style: TextStyle(color: Colors.white, fontSize: 14.sp)),
-        ],
+            SizedBox(width: 5.w),
+            Text(
+              label,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 14.sp,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

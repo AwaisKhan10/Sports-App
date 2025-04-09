@@ -7,16 +7,11 @@ import 'package:sports_app/core/constant/auth_field_decoration.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/ui/auth/register/register_view_model.dart';
+import 'package:sports_app/widget/buttons/custom_button.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
-import 'package:sports_app/widget/register_button.dart';
 
 class RegisterScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +20,7 @@ class RegisterScreen extends StatelessWidget {
       child: Consumer<RegisterViewModel>(
         builder:
             (context, model, child) => Scaffold(
-              backgroundColor: scaffoldColor,
+              backgroundColor: whiteColor,
               appBar: AppBar(
                 automaticallyImplyLeading: true,
                 backgroundColor: whiteColor,
@@ -60,22 +55,18 @@ class RegisterScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (model.error != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: Text(model.error!, style: TextStyle(color: Colors.red)),
-              ),
             _buildTextField(
               'Type your first name',
-              _firstNameController,
+              model.firstNameController,
               (value) =>
                   value == null || value.isEmpty
                       ? 'First name is required'
                       : null,
             ),
+
             _buildTextField(
               'Type your last name',
-              _lastNameController,
+              model.lastNameController,
               (value) =>
                   value == null || value.isEmpty
                       ? 'Last name is required'
@@ -83,7 +74,7 @@ class RegisterScreen extends StatelessWidget {
             ),
             _buildTextField(
               'Type your email',
-              _emailController,
+              model.emailController,
               (value) =>
                   !RegExp(
                         r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -93,19 +84,32 @@ class RegisterScreen extends StatelessWidget {
             ),
             _buildPasswordField(
               'Password',
-              _passwordController,
+              model.passwordController,
               (value) =>
                   ((value?.length ?? 0) < 6)
                       ? 'Password must be at least 6 characters'
                       : null,
+              model,
+              model.visible,
+
+              () {
+                model.toogleVisiblity();
+              },
+              model.visible,
             ),
             _buildPasswordField(
               'Confirm Password',
-              _confirmPasswordController,
+              model.confirmPasswordController,
               (value) =>
-                  value != _passwordController.text
+                  value != model.passwordController.text
                       ? 'Passwords do not match'
                       : null,
+              model,
+              model.visibleConfirm,
+              () {
+                model.toogleVisiblityConfirm();
+              },
+              model.visibleConfirm,
             ),
             30.verticalSpace,
             Text(
@@ -113,27 +117,29 @@ class RegisterScreen extends StatelessWidget {
               style: style16.copyWith(fontWeight: FontWeight.w400),
             ),
             30.verticalSpace,
-            CustomRegisterButton(
+            CustomButton(
               onPressed:
                   model.isLoading
                       ? null
                       : () {
                         if (_formKey.currentState?.validate() == true) {
                           model.register(
-                            firstName: _firstNameController.text,
-                            lastName: _lastNameController.text,
-                            email: _emailController.text,
-                            password: _passwordController.text,
+                            firstName: model.firstNameController.text,
+                            lastName: model.lastNameController.text,
+                            email: model.emailController.text,
+                            password: model.passwordController.text,
                           );
                         }
                       },
               color:
-                  model.isLoading
-                      ? secondaryColor.withOpacity(0.10)
+                  !model.isFormValid
+                      ? secondaryColor.withOpacity(0.2)
                       : secondaryColor,
+              textColor: !model.isFormValid ? blackColor : whiteColor,
+
               title: model.isLoading ? 'Registering...' : 'Register',
-              textColor: model.isLoading ? blackColor : whiteColor,
             ),
+
             40.verticalSpace,
           ],
         ),
@@ -162,26 +168,26 @@ class RegisterScreen extends StatelessWidget {
     String hintText,
     TextEditingController controller,
     String? Function(String?) validator,
+    RegisterViewModel model,
+    bool? obscureText,
+    VoidCallback onPressed,
+    final visibleNonVisible,
   ) {
     return StatefulBuilder(
       builder: (context, setState) {
-        bool isPasswordVisible = false;
         return Column(
           children: [
             TextFormField(
               controller: controller,
-              obscureText: !isPasswordVisible,
+              obscureText: obscureText!,
               decoration: authFieldDecoration.copyWith(
                 hintText: hintText,
                 suffixIconColor: lightgreyColor,
                 suffixIcon: IconButton(
                   icon: Icon(
-                    isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                    visibleNonVisible ? Icons.visibility : Icons.visibility_off,
                   ),
-                  onPressed:
-                      () => setState(
-                        () => isPasswordVisible = !isPasswordVisible,
-                      ),
+                  onPressed: onPressed,
                 ),
               ),
               validator: validator,

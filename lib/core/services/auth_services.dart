@@ -1,5 +1,5 @@
-import 'dart:io';
-import 'package:shared_preferences/shared_preferences.dart';
+// ignore_for_file: unused_field
+
 import 'package:sports_app/core/constant/api_end_points.dart';
 import 'package:sports_app/core/model/app_user.dart';
 import 'package:sports_app/core/model/response/request_response.dart';
@@ -33,6 +33,19 @@ class AuthService {
   final _dbService = DatabaseServices();
   final _apiService = ApiServices();
   final _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+  AppUser appUser = AppUser();
+
+  /// Check if user is logged in
+  Future<bool> checkLoginStatus() async {
+    final userId = _localStorageService.userId;
+    print("UserId: $userId");
+    if (userId != null) {
+      appUser = _localStorageService.user ?? AppUser();
+      print("AppUser: ${appUser.toJson().toString()}");
+    }
+    isLogin = userId != null;
+    return isLogin;
+  }
 
   /// Register a new user with email and password
   Future<RequestResponse<AppUser>> register({
@@ -61,7 +74,7 @@ class AuthService {
           lastName: lastName,
           email: email,
         );
-
+        appUser = user;
         // Store user data locally
         await _localStorageService.setUserId(userId);
         await _localStorageService.setUser(user);
@@ -69,10 +82,10 @@ class AuthService {
 
         return RequestResponse(true, data: user);
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 
@@ -86,22 +99,23 @@ class AuthService {
         url: EndPoints.login,
         data: {'email': email, 'password': password},
       );
-
-      if (response.success) {
+      if (response.success &&
+          response.data != null &&
+          response.data['data'] != null) {
         final userData = response.data['data'];
         final user = AppUser.fromJson(userData);
-
+        appUser = user;
         // Store user data locally
-        await _localStorageService.setUserId(user.userId);
+        await _localStorageService.setUserId(user.userId!);
         await _localStorageService.setUser(user);
         isLogin = true;
 
         return RequestResponse(true, data: user);
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 
@@ -111,7 +125,7 @@ class AuthService {
       // Start Google Sign In flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        return RequestResponse(false, error: 'Google sign in was cancelled');
+        return RequestResponse(false, message: 'Google sign in was cancelled');
       }
 
       // Get Google auth details
@@ -122,7 +136,7 @@ class AuthService {
       if (accessToken == null) {
         return RequestResponse(
           false,
-          error: 'Failed to get Google access token',
+          message: 'Failed to get Google access token',
         );
       }
 
@@ -142,16 +156,16 @@ class AuthService {
         final user = AppUser.fromJson(userData);
 
         // Store user data locally
-        await _localStorageService.setUserId(user.userId);
+        await _localStorageService.setUserId(user.userId!);
         await _localStorageService.setUser(user);
         isLogin = true;
 
         return RequestResponse(true, data: user);
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
   }
 
@@ -163,7 +177,7 @@ class AuthService {
       if (!isAvailable) {
         return RequestResponse(
           false,
-          error: 'Apple sign in is not available on this device',
+          message: 'Apple sign in is not available on this device',
         );
       }
 
@@ -192,24 +206,17 @@ class AuthService {
         final user = AppUser.fromJson(userData);
 
         // Store user data locally
-        await _localStorageService.setUserId(user.userId);
+        await _localStorageService.setUserId(user.userId!);
         await _localStorageService.setUser(user);
         isLogin = true;
 
         return RequestResponse(true, data: user);
       } else {
-        return RequestResponse(false, error: response.error);
+        return RequestResponse(false, message: response.error);
       }
     } catch (e) {
-      return RequestResponse(false, error: e.toString());
+      return RequestResponse(false, message: e.toString());
     }
-  }
-
-  /// Check if user is logged in
-  Future<bool> checkLoginStatus() async {
-    final userId = _localStorageService.userId;
-    isLogin = userId != null;
-    return isLogin;
   }
 
   /// Logout user

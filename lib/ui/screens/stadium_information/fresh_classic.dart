@@ -4,7 +4,6 @@ import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/widget/custom_app_bar.dart';
-import 'package:sports_app/widget/header.dart';
 
 class FreshClassicScreen extends StatelessWidget {
   const FreshClassicScreen({super.key});

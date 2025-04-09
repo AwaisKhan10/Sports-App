@@ -1,16 +1,16 @@
 class AppUser {
-  final String userId;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String? profileImage;
-  final String? phone;
+  String? userId;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? profileImage;
+  String? phone;
 
   AppUser({
-    required this.userId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
+    this.userId,
+    this.firstName,
+    this.lastName,
+    this.email,
     this.profileImage,
     this.phone,
   });

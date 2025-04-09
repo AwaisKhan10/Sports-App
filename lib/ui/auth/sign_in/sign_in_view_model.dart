@@ -1,16 +1,42 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sports_app/core/services/auth_services.dart';
-import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
-import 'package:sports_app/ui/screens/home/home_screen.dart';
+// ignore_for_file: avoid_print
 
-class SignInViewModel extends ChangeNotifier {
-  final _authService = AuthService();
+import 'package:get/get.dart';
+import 'package:sports_app/core/others/base_view_model.dart';
+import 'package:sports_app/core/services/auth_services.dart';
+import 'package:sports_app/locator.dart';
+import 'package:sports_app/ui/screens/drawer/drawer_screen.dart';
+
+class SignInViewModel extends BaseViewModel {
+  final _authService = locator<AuthService>();
   bool _isLoading = false;
   String? _error;
-
+  bool visible = false;
+  String _email = '';
+  String _password = '';
   bool get isLoading => _isLoading;
   String? get error => _error;
+
+  bool get isFormValid {
+    final emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegex.hasMatch(_email) && _password.length >= 6;
+  }
+
+  toogleVisiblity() {
+    visible = !visible;
+    notifyListeners();
+  }
+
+  void updateEmail(String value) {
+    _email = value;
+    notifyListeners();
+  }
+
+  void updatePassword(String value) {
+    _password = value;
+    notifyListeners();
+  }
 
   Future<void> login({required String email, required String password}) async {
     _isLoading = true;
@@ -19,14 +45,13 @@ class SignInViewModel extends ChangeNotifier {
 
     try {
       final result = await _authService.login(email: email, password: password);
-
       if (result.success) {
-        // Navigate to home screen or dashboard
-        Get.offAll(
-          () => DrawerScreen(),
-        ); // Uncomment and import your home screen
+        Get.snackbar("Sucessfully", "Your Account is login Sucessfully");
+        Get.offAll(() => DrawerScreen());
       } else {
-        _error = result.error ?? 'Login failed';
+        _error = result.message ?? 'Login failed';
+        print("LOGIN => $_error");
+        Get.snackbar('Login Message', "Please Check your Email and Password");
       }
     } catch (e) {
       _error = e.toString();
@@ -47,7 +72,7 @@ class SignInViewModel extends ChangeNotifier {
       if (result.success) {
         Get.offAll(() => DrawerScreen());
       } else {
-        _error = result.error ?? 'Google login failed';
+        _error = result.message ?? 'Google login failed';
       }
     } catch (e) {
       _error = e.toString();
@@ -68,7 +93,7 @@ class SignInViewModel extends ChangeNotifier {
       if (result.success) {
         Get.offAll(() => DrawerScreen());
       } else {
-        _error = result.error ?? 'Apple login failed';
+        _error = result.message ?? 'Apple login failed';
       }
     } catch (e) {
       _error = e.toString();

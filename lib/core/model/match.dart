@@ -1,75 +1,43 @@
-class Match {
-  final int fixtureId;
-  final int tournamentId;
-  final int leagueId;
-  final int homeTeamId;
-  final int awayTeamId;
-  final DateTime matchDate;
-  final String venue;
-  final String status;
-  final int homeGoals;
-  final int awayGoals;
-  final DateTime createdAt;
-  final String matchType;
+class Matches {
+  final String matchId;
   final String homeTeam;
+  final String homeLogo;
   final String awayTeam;
+  final String awayLogo;
+  final String matchDate;
+  final String venue;
 
-  Match({
-    required this.fixtureId,
-    required this.tournamentId,
-    required this.leagueId,
-    required this.homeTeamId,
-    required this.awayTeamId,
+  Matches({
+    required this.matchId,
+    required this.homeTeam,
+    required this.homeLogo,
+    required this.awayTeam,
+    required this.awayLogo,
     required this.matchDate,
     required this.venue,
-    required this.status,
-    required this.homeGoals,
-    required this.awayGoals,
-    required this.createdAt,
-    required this.matchType,
-    required this.homeTeam,
-    required this.awayTeam,
   });
 
-  factory Match.fromJson(Map<String, dynamic> json) {
-    return Match(
-      fixtureId: json['fixture_id'],
-      tournamentId: json['tournament_id'],
-      leagueId: json['league_id'],
-      homeTeamId: json['home_team_id'],
-      awayTeamId: json['away_team_id'],
-      matchDate: DateTime.parse(json['match_date']),
-      venue: json['venue'],
-      status: json['status'],
-      homeGoals: json['home_goals'],
-      awayGoals: json['away_goals'],
-      createdAt: DateTime.parse(json['created_at']),
-      matchType: json['match_type'],
-      homeTeam: json['home_team'],
-      awayTeam: json['away_team'],
+  factory Matches.fromJson(Map<String, dynamic> json) {
+    return Matches(
+      matchId: json['match_id'] ?? '',
+      homeTeam: json['home_team'] ?? '',
+      homeLogo: json['home_logo'] ?? '',
+      awayTeam: json['away_team'] ?? '',
+      awayLogo: json['away_logo'] ?? '',
+      matchDate: json['match_date'] ?? '',
+      venue: json['venue'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'fixture_id': fixtureId,
-      'tournament_id': tournamentId,
-      'league_id': leagueId,
-      'home_team_id': homeTeamId,
-      'away_team_id': awayTeamId,
-      'match_date': matchDate.toIso8601String(),
-      'venue': venue,
-      'status': status,
-      'home_goals': homeGoals,
-      'away_goals': awayGoals,
-      'created_at': createdAt.toIso8601String(),
-      'match_type': matchType,
+      'match_id': matchId,
       'home_team': homeTeam,
+      'home_logo': homeLogo,
       'away_team': awayTeam,
+      'away_logo': awayLogo,
+      'match_date': matchDate,
+      'venue': venue,
     };
   }
-
-  String get score => '$homeGoals - $awayGoals';
-  bool get isCompleted => status.toLowerCase() == 'completed';
-  bool get isScheduled => status.toLowerCase() == 'scheduled';
 }

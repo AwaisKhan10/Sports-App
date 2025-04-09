@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
-import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/model/ticket.dart';
 import 'package:sports_app/ui/screens/parking/getting_help.dart';
 import 'package:sports_app/ui/screens/parking/parking_diagram.dart';

@@ -5,7 +5,6 @@ import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/widget/custom_app_bar.dart';
 import 'package:sports_app/widget/drop_down_expendable_button.dart';
-import 'package:sports_app/widget/header.dart';
 
 class StadiumAssistScreen extends StatelessWidget {
   const StadiumAssistScreen({super.key});
