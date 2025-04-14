@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
 
@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget {
       automaticallyImplyLeading: true,
       title: Text(
         "$title",
-        style: style20B.copyWith(color: blackColor, fontSize: 22.sp),
+        style: style18B.copyWith(fontFamily: GoogleFonts.poppins().fontFamily),
       ),
     );
   }

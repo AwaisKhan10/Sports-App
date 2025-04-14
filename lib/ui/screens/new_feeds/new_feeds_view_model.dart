@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'dart:developer';
+import 'package:sports_app/core/enums/view_state.dart';
 import 'package:sports_app/core/model/comment.dart';
 import 'package:sports_app/core/model/like.dart';
 import 'package:sports_app/core/model/post.dart';
@@ -8,17 +9,15 @@ import 'package:sports_app/core/others/base_view_model.dart';
 import 'package:sports_app/core/services/database_services.dart';
 import 'package:sports_app/core/services/local_storage.dart';
 
-class ScrollViewViewModel extends BaseViewModel {
+class NewFeedsViewModel extends BaseViewModel {
   final _databaseService = DatabaseServices();
   final _localStorageService = LocalStorageService();
 
-  bool _isLoading = false;
   String? _error;
   List<Post> _posts = [];
   Map<String, bool> _isPostingComment = {};
   Map<String, bool> isLike = {}; // Track like status
 
-  bool get isLoading => _isLoading;
   String? get error => _error;
   List<Post> get posts => _posts;
   bool isPostingCommentFor(String postId) => _isPostingComment[postId] ?? false;
@@ -26,10 +25,7 @@ class ScrollViewViewModel extends BaseViewModel {
       isLike[postId] ?? false; // Check if post is liked
 
   Future<void> loadPosts() async {
-    _isLoading = true;
-    _error = null;
-    notifyListeners();
-
+    setState(ViewState.busy);
     try {
       final result = await _databaseService.getAllPosts();
       if (result.success && result.data != null) {
@@ -51,7 +47,7 @@ class ScrollViewViewModel extends BaseViewModel {
       _error = e.toString();
       log(e.toString());
     } finally {
-      _isLoading = false;
+      setState(ViewState.idle);
       notifyListeners();
     }
   }

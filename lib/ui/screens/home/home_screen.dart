@@ -29,79 +29,79 @@ class HomeScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: scaffoldColor,
 
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            body: SingleChildScrollView(
               child: Column(
                 children: [
                   CustomDropDownExpendableButton(
                     text:
                         'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
                   ),
-                  40.verticalSpace,
-                  Text(
-                    'Welcome to App',
-                    style: style25.copyWith(fontWeight: FontWeight.w700),
-                  ),
-                  Text(
-                    'Creating a profile and signing will allow you \n to use app',
-                    style: style18.copyWith(fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.center,
-                  ),
-                  40.verticalSpace,
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
                       children: [
-                        CustomSocialMediaIcon(
-                          imagePath: AppAssets().fb,
-                          onTap: () {
-                            print('fb');
-                          },
+                        40.verticalSpace,
+                        Text(
+                          'Welcome to App',
+                          style: style25.copyWith(fontWeight: FontWeight.w700),
                         ),
-                        CustomSocialMediaIcon(
-                          imagePath: AppAssets().twitter,
-                          onTap: () {
-                            print('twitter');
-                          },
+                        Text(
+                          'Creating a profile and signing will allow you to use app',
+                          style: style18.copyWith(fontWeight: FontWeight.w400),
+                          textAlign: TextAlign.center,
                         ),
-                        CustomSocialMediaIcon(
-                          imagePath: AppAssets().insta,
-                          onTap: () {
-                            print('insta');
-                          },
+                        40.verticalSpace,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomSocialMediaIcon(
+                              imagePath: AppAssets().fb,
+                              onTap: () {
+                                print('fb');
+                              },
+                            ),
+                            CustomSocialMediaIcon(
+                              imagePath: AppAssets().twitter,
+                              onTap: () {
+                                print('twitter');
+                              },
+                            ),
+                            CustomSocialMediaIcon(
+                              imagePath: AppAssets().insta,
+                              onTap: () {
+                                print('insta');
+                              },
+                            ),
+                          ],
                         ),
+                        40.verticalSpace,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomSocialMediaIcon(
+                              imagePath: AppAssets().tiktok,
+                              onTap: () {
+                                print('tiktok');
+                              },
+                            ),
+                            CustomSocialMediaIcon(
+                              imagePath: AppAssets().youtube,
+                              onTap: () {
+                                print('youtube');
+                              },
+                            ),
+                            CustomSocialMediaIcon(
+                              imagePath: AppAssets().snap,
+                              onTap: () {
+                                print('snap');
+                              },
+                            ),
+                          ],
+                        ),
+                        // _scocailMediaIconButton(),
                       ],
                     ),
                   ),
-                  40.verticalSpace,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomSocialMediaIcon(
-                          imagePath: AppAssets().tiktok,
-                          onTap: () {
-                            print('tiktok');
-                          },
-                        ),
-                        CustomSocialMediaIcon(
-                          imagePath: AppAssets().youtube,
-                          onTap: () {
-                            print('youtube');
-                          },
-                        ),
-                        CustomSocialMediaIcon(
-                          imagePath: AppAssets().snap,
-                          onTap: () {
-                            print('snap');
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  // _scocailMediaIconButton(),
                 ],
               ),
             ),

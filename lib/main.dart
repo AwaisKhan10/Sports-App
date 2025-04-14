@@ -4,7 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/locator.dart';
-import 'package:sports_app/ui/screens/scroll_view/scroll_view_view_model.dart';
+import 'package:sports_app/ui/screens/new_feeds/new_feeds_view_model.dart';
 import 'package:sports_app/ui/screens/splash/splash_screen.dart';
 
 void main() async {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ScrollViewViewModel()),
+        ChangeNotifierProvider(create: (_) => NewFeedsViewModel()),
         // Add other providers here as needed
       ],
       child: ScreenUtilInit(
@@ -35,6 +35,12 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Sports App',
             theme: ThemeData(
+              appBarTheme: AppBarTheme(
+                surfaceTintColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                foregroundColor: Colors.transparent,
+              ),
               scaffoldBackgroundColor: scaffoldColor,
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
               useMaterial3: true,

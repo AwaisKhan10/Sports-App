@@ -39,12 +39,7 @@ class CustomTeamPlayerPositionCard extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: player.profileImage,
                       fit: BoxFit.contain,
-                      placeholder:
-                          (context, url) => Center(
-                            child: CircularProgressIndicator(
-                              color: primaryColor,
-                            ),
-                          ),
+
                       errorWidget:
                           (context, url, error) =>
                               Icon(Icons.person, size: 50.r),

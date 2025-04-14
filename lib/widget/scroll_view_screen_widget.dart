@@ -5,22 +5,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/auth_field_decoration.dart';
 import 'package:sports_app/core/constant/colors.dart';
+import 'package:sports_app/core/constant/text_style.dart';
 import 'package:sports_app/core/model/post.dart';
-import 'package:sports_app/ui/screens/scroll_view/scroll_view_view_model.dart';
+import 'package:sports_app/ui/screens/new_feeds/new_feeds_view_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CustomTweetCardWidget extends StatelessWidget {
   final Post post;
-  final ScrollViewViewModel viewModel;
+  final NewFeedsViewModel viewModel;
 
   const CustomTweetCardWidget({required this.post, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: whiteColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
-      elevation: 4,
+    return Container(
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(8.r),
+        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 2)],
+      ),
+
       margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
       child: Padding(
         padding: EdgeInsets.all(12.w),
@@ -37,10 +41,7 @@ class CustomTweetCardWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        post.teamName,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                      Text(post.teamName, style: style16),
                       // Text(
                       //   "@sanjoseteam",
                       //   style: TextStyle(color: Colors.grey),
@@ -50,14 +51,14 @@ class CustomTweetCardWidget extends StatelessWidget {
                 ),
                 Text(
                   timeago.format(post.createdAt),
-                  style: TextStyle(color: Colors.grey),
+                  style: style14.copyWith(color: darkGreyColor),
                 ),
               ],
             ),
             SizedBox(height: 10.h),
 
             /// Post Text
-            Text(post.postText, style: TextStyle(fontSize: 16.sp)),
+            Text(post.postText, style: style16),
 
             /// Post Image (if exists)
             if (post.postImg != null) ...[
@@ -129,7 +130,7 @@ class CustomTweetCardWidget extends StatelessWidget {
 
 class CommentBottomSheet extends StatefulWidget {
   final Post post;
-  final ScrollViewViewModel viewModel;
+  final NewFeedsViewModel viewModel;
 
   CommentBottomSheet({required this.post, required this.viewModel});
 
@@ -193,10 +194,7 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
                 /// Title
                 Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    "Comments",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                  child: Text("Comments", style: style18B),
                 ),
 
                 SizedBox(height: 8),

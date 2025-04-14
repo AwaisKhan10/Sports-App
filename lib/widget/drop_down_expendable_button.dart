@@ -97,8 +97,7 @@ class _CustomDropDownExpendableButtonState
             AnimatedContainer(
               color: whiteColor,
               duration: Duration(milliseconds: 500),
-              curve: Curves.easeInOut, // Smooth animation curve
-              // height: _isExpanded ? 140.h : 0, // Expands vertically
+              curve: Curves.easeInOut,
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: SlideTransition(
@@ -108,7 +107,7 @@ class _CustomDropDownExpendableButtonState
                         ? Text(
                           widget.text,
                           textAlign: TextAlign.center,
-                          style: style16.copyWith(),
+                          style: style14.copyWith(),
                         )
                         : null,
               ),

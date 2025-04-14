@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
@@ -22,7 +24,7 @@ class DrawerScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: scaffoldColor,
             appBar: AppBar(
-              toolbarHeight: 70.h,
+              toolbarHeight: 60.h,
               centerTitle: true,
               title: Text(model.currentScreenName, style: style20B),
               backgroundColor: Colors.white,
@@ -30,11 +32,8 @@ class DrawerScreen extends StatelessWidget {
               shadowColor: scaffoldColor,
               surfaceTintColor: scaffoldColor,
             ),
-            drawer: CustomDrawer(
-              authServices: model.authservices,
-            ), // Use the custom drawer here
-            body:
-                model.currentScreen, // Directly use ViewModel’s selected screen
+            drawer: CustomDrawer(authServices: model.authservices),
+            body: model.currentScreen,
           );
         },
       ),
@@ -45,7 +44,7 @@ class DrawerScreen extends StatelessWidget {
 // custom drawer
 class CustomDrawer extends StatelessWidget {
   final AuthService authServices;
-  CustomDrawer({required this.authServices});
+  const CustomDrawer({required this.authServices});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -58,6 +57,7 @@ class CustomDrawer extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              30.verticalSpace,
               ListTile(
                 leading: CircleAvatar(
                   radius: 30.r,
@@ -82,7 +82,10 @@ class CustomDrawer extends StatelessWidget {
                     onPressed: () {
                       Get.to(() => SignInScreen());
                     },
-                    child: Text("Login", style: TextStyle(color: Colors.white)),
+                    child: Text(
+                      "Login",
+                      style: style16.copyWith(color: whiteColor),
+                    ),
                   ),
                 ),
               ),
@@ -91,12 +94,12 @@ class CustomDrawer extends StatelessWidget {
 
           // **Drawer Menu Items**
           _buildDrawerItem(context, 0, AppAssets().home, 'Home'),
-          _buildDrawerItem(context, 1, AppAssets().scrollView, 'scroll view'),
+          _buildDrawerItem(context, 1, AppAssets().scrollView, 'News Feed'),
           _buildDrawerItem(context, 2, AppAssets().ticket, 'Ticketing'),
-          _buildDrawerItem(context, 3, AppAssets().parking, 'parking'),
-          _buildDrawerItem(context, 4, AppAssets().schedule, 'schedule'),
+          _buildDrawerItem(context, 3, AppAssets().parking, 'Parking'),
+          _buildDrawerItem(context, 4, AppAssets().schedule, 'Matches'),
 
-          _buildDrawerItem(context, 5, AppAssets().team, 'The team'),
+          _buildDrawerItem(context, 5, AppAssets().team, 'Teams'),
           _buildDrawerItem(
             context,
             6,

@@ -29,17 +29,13 @@ class CustomTeamPlayerNameCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 100.h,
-                  width: 100.w,
+                  width: 80.w,
                   child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.r),
                     child: CachedNetworkImage(
-                      imageUrl: player.profileImage,
-                      fit: BoxFit.contain,
-                      placeholder:
-                          (context, url) => Center(
-                            child: CircularProgressIndicator(
-                              color: primaryColor,
-                            ),
-                          ),
+                      imageUrl: player.profileImage!,
+                      fit: BoxFit.cover,
+
                       errorWidget:
                           (context, url, error) =>
                               Icon(Icons.person, size: 50.r),
@@ -53,7 +49,7 @@ class CustomTeamPlayerNameCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    player.name,
+                    player.name!,
                     style: style18.copyWith(fontWeight: FontWeight.w700),
                   ),
                   Text(

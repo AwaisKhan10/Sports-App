@@ -1,3 +1,4 @@
+import 'package:sports_app/core/enums/view_state.dart';
 import 'package:sports_app/core/model/team_model.dart';
 import 'package:sports_app/core/model/team_player.dart';
 import 'package:sports_app/core/model/team_staff.dart';
@@ -11,19 +12,15 @@ class TeamViewModel extends BaseViewModel {
   List<TeamModel> _teams = [];
   List<TeamPlayerModel> _players = [];
   List<TeamStaffModel> _staff = [];
-  bool _isLoading = false;
   String _errorMessage = '';
 
   List<TeamModel> get teams => _teams;
   List<TeamPlayerModel> get players => _players;
   List<TeamStaffModel> get staff => _staff;
-  bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
 
-  void fetchTeams() async {
-    _isLoading = true;
-    notifyListeners();
-
+  fetchTeams() async {
+    setState(ViewState.busy);
     try {
       // Call the getTeams method and handle the RequestResponse
       RequestResponse<List<TeamModel>> response = await _db.getTeams();
@@ -38,13 +35,12 @@ class TeamViewModel extends BaseViewModel {
       _errorMessage = e.toString(); // Handle any unexpected errors
     }
 
-    _isLoading = false;
+    setState(ViewState.idle);
     notifyListeners();
   }
 
   Future<void> fetchTeamPlayers(int teamId) async {
-    _isLoading = true;
-    notifyListeners();
+    setState(ViewState.busy);
 
     try {
       RequestResponse<List<TeamPlayerModel>> response = await _db
@@ -60,13 +56,12 @@ class TeamViewModel extends BaseViewModel {
       _errorMessage = e.toString();
     }
 
-    _isLoading = false;
+    setState(ViewState.idle);
     notifyListeners();
   }
 
   Future<void> fetchTeamStaff(int teamId) async {
-    _isLoading = true;
-    notifyListeners();
+    setState(ViewState.busy);
 
     try {
       RequestResponse<List<TeamStaffModel>> response = await _db.getTeamStaff(
@@ -83,7 +78,7 @@ class TeamViewModel extends BaseViewModel {
       _errorMessage = e.toString();
     }
 
-    _isLoading = false;
+    setState(ViewState.idle);
     notifyListeners();
   }
 
