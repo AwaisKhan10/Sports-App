@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/route_manager.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
+import 'package:sports_app/core/enums/view_state.dart';
 import 'package:sports_app/core/services/auth_services.dart';
-import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
 import 'package:sports_app/ui/screens/drawer/drawer_view_model.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -20,20 +20,25 @@ class DrawerScreen extends StatelessWidget {
       create: (context) => DrawerScreenViewModel(),
       child: Consumer<DrawerScreenViewModel>(
         builder: (context, model, child) {
-          print("name: ${model.authservices.appUser.toJson()}");
-          return Scaffold(
-            backgroundColor: scaffoldColor,
-            appBar: AppBar(
-              toolbarHeight: 60.h,
-              centerTitle: true,
-              title: Text(model.currentScreenName, style: style20B),
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
-              shadowColor: scaffoldColor,
-              surfaceTintColor: scaffoldColor,
+          return ModalProgressHUD(
+            inAsyncCall: model.state == ViewState.busy,
+            child: Scaffold(
+              backgroundColor: scaffoldColor,
+              appBar: AppBar(
+                toolbarHeight: 60.h,
+                centerTitle: true,
+                title: Text(model.currentScreenName, style: style20B),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                shadowColor: scaffoldColor,
+                surfaceTintColor: scaffoldColor,
+              ),
+              drawer: CustomDrawer(
+                model: model,
+                authServices: model.authservices,
+              ),
+              body: model.currentScreen,
             ),
-            drawer: CustomDrawer(authServices: model.authservices),
-            body: model.currentScreen,
           );
         },
       ),
@@ -44,7 +49,8 @@ class DrawerScreen extends StatelessWidget {
 // custom drawer
 class CustomDrawer extends StatelessWidget {
   final AuthService authServices;
-  const CustomDrawer({required this.authServices});
+  final DrawerScreenViewModel model;
+  const CustomDrawer({required this.authServices, required this.model});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -79,13 +85,19 @@ class CustomDrawer extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: () {
-                      Get.to(() => SignInScreen());
+                    onPressed: () async {
+                      await model.logoutUser(context);
                     },
-                    child: Text(
-                      "Login",
-                      style: style16.copyWith(color: whiteColor),
-                    ),
+                    child:
+                        authServices.isLogin
+                            ? Text(
+                              "Logout",
+                              style: style16.copyWith(color: whiteColor),
+                            )
+                            : Text(
+                              "Login",
+                              style: style16.copyWith(color: whiteColor),
+                            ),
                   ),
                 ),
               ),
@@ -96,7 +108,7 @@ class CustomDrawer extends StatelessWidget {
           _buildDrawerItem(context, 0, AppAssets().home, 'Home'),
           _buildDrawerItem(context, 1, AppAssets().scrollView, 'News Feed'),
           _buildDrawerItem(context, 2, AppAssets().ticket, 'Ticketing'),
-          _buildDrawerItem(context, 3, AppAssets().parking, 'Parking'),
+          // _buildDrawerItem(context, 3, AppAssets().parking, 'Parking'),
           _buildDrawerItem(context, 4, AppAssets().schedule, 'Matches'),
 
           _buildDrawerItem(context, 5, AppAssets().team, 'Teams'),
@@ -107,15 +119,15 @@ class CustomDrawer extends StatelessWidget {
             'Notification',
           ),
           _buildDrawerItem(context, 7, AppAssets().fan, 'Fan Engagement'),
-          _buildDrawerItem(
-            context,
-            8,
-            AppAssets().info_stadium,
-            'Stadium information',
-          ),
+          // _buildDrawerItem(
+          //   context,
+          //   8,
+          //   AppAssets().info_stadium,
+          //   'Stadium information',
+          // ),
           _buildDrawerItem(context, 9, AppAssets().merchandise, 'Merchandise'),
-          _buildDrawerItem(context, 10, AppAssets().concessions, 'Concession'),
-          _buildDrawerItem(context, 11, AppAssets().mls, 'MLS Matchday'),
+          // _buildDrawerItem(context, 10, AppAssets().concessions, 'Concession'),
+          // _buildDrawerItem(context, 11, AppAssets().mls, 'MLS Matchday'),
           _buildDrawerItem(
             context,
             12,

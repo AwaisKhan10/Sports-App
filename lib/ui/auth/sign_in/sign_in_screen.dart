@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:provider/provider.dart';
 import 'package:sports_app/core/constant/app_assets.dart';
 import 'package:sports_app/core/constant/auth_field_decoration.dart';
 import 'package:sports_app/core/constant/colors.dart';
 import 'package:sports_app/core/constant/text_style.dart';
+import 'package:sports_app/core/enums/view_state.dart';
 import 'package:sports_app/ui/auth/register/register_screen.dart';
 import 'package:sports_app/ui/auth/sign_in/sign_in_view_model.dart';
 import 'package:sports_app/widget/buttons/custom_button.dart';
@@ -46,46 +48,49 @@ class _SignInScreenState extends State<SignInScreen> {
               onTap: () {
                 FocusScope.of(context).unfocus();
               },
-              child: Scaffold(
-                backgroundColor: whiteColor,
-
-                ///
-                /// Start AppBar
-                ///
-                appBar: AppBar(
+              child: ModalProgressHUD(
+                inAsyncCall: model.state == ViewState.busy,
+                child: Scaffold(
                   backgroundColor: whiteColor,
-                  centerTitle: true,
-                  title: Text(
-                    'Sign In',
-                    style: style20B.copyWith(
-                      color: blackColor,
-                      fontSize: 22.sp,
+
+                  ///
+                  /// Start AppBar
+                  ///
+                  appBar: AppBar(
+                    backgroundColor: whiteColor,
+                    centerTitle: true,
+                    title: Text(
+                      'Sign In',
+                      style: style20B.copyWith(
+                        color: blackColor,
+                        fontSize: 22.sp,
+                      ),
                     ),
                   ),
-                ),
 
-                ///
-                /// Start Body
-                ///
-                body: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ///
-                      /// Drop Down
-                      ///
-                      CustomDropDownExpendableButton(
-                        text:
-                            'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
-                      ),
-                      50.verticalSpace,
+                  ///
+                  /// Start Body
+                  ///
+                  body: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ///
+                        /// Drop Down
+                        ///
+                        CustomDropDownExpendableButton(
+                          text:
+                              'Welcome to the Avaya App. For great in-app features such as posting to the Fan Engagement Wall and social sharing, please create a profile here. Digital Ticketing is a separate feature with your Earthquakes Ticketmaster Account login details.',
+                        ),
+                        50.verticalSpace,
 
-                      ///
-                      /// SignIn Section
-                      ///
-                      _signInSection(context, model),
-                    ],
+                        ///
+                        /// SignIn Section
+                        ///
+                        _signInSection(context, model),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -238,12 +243,9 @@ class _SignInScreenState extends State<SignInScreen> {
               title: 'Sign In with Google',
               color: blackColor,
               textColor: whiteColor,
-              onPressed:
-                  model.isLoading
-                      ? null
-                      : () async {
-                        await model.loginWithGoogle();
-                      },
+              onPressed: () async {
+                await model.loginWithGoogle();
+              },
             ),
             20.verticalSpace,
 

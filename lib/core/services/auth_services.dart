@@ -122,9 +122,15 @@ class AuthService {
   /// Login with Google
   Future<RequestResponse<AppUser>> loginWithGoogle() async {
     try {
+      print("🌀 Starting Google Sign-In flow...");
+
       // Start Google Sign In flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      print("🔍 Google User: $googleUser");
+
       if (googleUser == null) {
+        print("❌ Google sign in was cancelled by the user.");
         return RequestResponse(false, message: 'Google sign in was cancelled');
       }
 
@@ -133,26 +139,42 @@ class AuthService {
           await googleUser.authentication;
       final accessToken = googleAuth.accessToken;
 
+      print("🔑 Google Access Token: $accessToken");
+      print("🧾 Google User ID: ${googleUser.id}");
+      print("📧 Google Email: ${googleUser.email}");
+      print("👤 Google Display Name: ${googleUser.displayName}");
+
       if (accessToken == null) {
+        print("❌ Failed to get Google access token");
         return RequestResponse(
           false,
           message: 'Failed to get Google access token',
         );
       }
 
-      // Call backend API with Google token
+      // Prepare data to send to backend
+      final data = {
+        'provider': 'google',
+        'social_id': googleUser.id,
+        'email': googleUser.email,
+        'first_name': googleUser.displayName?.split(' ').first ?? '',
+        'last_name': googleUser.displayName?.split(' ').skip(1).join(' ') ?? '',
+      };
+
+      print("📤 Sending data to API: ${data.toString()}");
+
+      // Call backend API
       final response = await _apiService.post(
         url: EndPoints.socialLogin,
-        data: {
-          'provider': 'google',
-          'social_id': accessToken,
-          'email': googleUser.email,
-          'first_name': googleUser.displayName ?? '',
-        },
+        data: data,
       );
+
+      print("✅ API Response: ${response.toJson()}");
 
       if (response.success) {
         final userData = response.data['data'];
+        print("📥 User Data from API: ${userData.toString()}");
+
         final user = AppUser.fromJson(userData);
 
         // Store user data locally
@@ -160,11 +182,15 @@ class AuthService {
         await _localStorageService.setUser(user);
         isLogin = true;
 
+        print("✅ Login success. User ID: ${user.userId}");
+
         return RequestResponse(true, data: user);
       } else {
+        print("❌ Backend returned error: ${response.error}");
         return RequestResponse(false, message: response.error);
       }
     } catch (e) {
+      print("❗️Exception during loginWithGoogle: $e");
       return RequestResponse(false, message: e.toString());
     }
   }

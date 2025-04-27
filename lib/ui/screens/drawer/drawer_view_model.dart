@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:sports_app/core/enums/view_state.dart';
+import 'package:sports_app/core/others/base_view_model.dart';
 import 'package:sports_app/core/services/auth_services.dart';
 import 'package:sports_app/locator.dart';
+import 'package:sports_app/ui/auth/sign_in/sign_in_screen.dart';
 import 'package:sports_app/ui/screens/new_feeds/new_feeds_screen.dart'
     show NewFeedScreen;
 import 'package:sports_app/ui/screens/%20%20ticketing/%20%20ticketing_screen.dart';
@@ -8,8 +12,6 @@ import 'package:sports_app/ui/screens/%20Info_support/%20Info_support_screen.dar
 import 'package:sports_app/ui/screens/%20merchandise/%20merchandise_screen.dart';
 import 'package:sports_app/ui/screens/MLS_matchday/MLS_match_day.dart';
 import 'package:sports_app/ui/screens/concession/concession_screen.dart';
-import 'package:sports_app/ui/screens/fan_engagement/fan_engegement_screen.dart';
-
 import 'package:sports_app/ui/screens/home/home_screen.dart';
 import 'package:sports_app/ui/screens/notification/notification_screen.dart';
 import 'package:sports_app/ui/screens/parking/parking_screen.dart';
@@ -17,7 +19,7 @@ import 'package:sports_app/ui/screens/matches/matches_screen.dart';
 import 'package:sports_app/ui/screens/stadium_information/stadium_info_screen.dart';
 import 'package:sports_app/ui/screens/the_team/teams/teams_screen.dart';
 
-class DrawerScreenViewModel extends ChangeNotifier {
+class DrawerScreenViewModel extends BaseViewModel {
   int _selectedIndex = 0; // Default screen index
 
   final authservices = locator<AuthService>();
@@ -26,15 +28,15 @@ class DrawerScreenViewModel extends ChangeNotifier {
     "Home",
     "News Feed",
     "Ticketing",
-    "Parking",
+    // "Parking",
     "Matches",
     "Teams",
     "Notification",
     "Fan Engagement",
-    "Stadium Information",
+    // "Stadium Information",
     "Merchandise",
-    "Concession",
-    "MLS Matchday",
+    // "Concession",
+    // "MLS Matchday",
     "Info/Support",
   ];
 
@@ -42,17 +44,31 @@ class DrawerScreenViewModel extends ChangeNotifier {
     HomeScreen(),
     NewFeedScreen(),
     TicketingScreen(),
-    ParkingScreen(),
+    // ParkingScreen(),
     MatchesScreen(),
     TeamScreen(),
     NotificationScreen(),
     NewFeedScreen(),
-    StadiumInformationScreen(),
+    // StadiumInformationScreen(),
     MerchandiseScreen(),
-    ConcessionScreen(),
-    MLSmatchday(),
+    // ConcessionScreen(),
+    // MLSmatchday(),
     InfoSupportScreen(),
   ];
+
+  Future<void> logoutUser(BuildContext context) async {
+    setState(ViewState.busy);
+    try {
+      await authservices.logout();
+      Get.snackbar("Success", "Logged out successfully");
+      Get.offAll(SignInScreen());
+    } catch (e) {
+      print("Logout failed: $e");
+    } finally {
+      setState(ViewState.idle);
+      notifyListeners();
+    }
+  }
 
   int get selectedIndex => _selectedIndex;
   Widget get currentScreen => screens[_selectedIndex];

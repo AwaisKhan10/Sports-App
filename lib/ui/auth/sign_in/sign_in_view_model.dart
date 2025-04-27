@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:get/get.dart';
+import 'package:sports_app/core/enums/view_state.dart';
 import 'package:sports_app/core/others/base_view_model.dart';
 import 'package:sports_app/core/services/auth_services.dart';
 import 'package:sports_app/locator.dart';
@@ -62,14 +63,13 @@ class SignInViewModel extends BaseViewModel {
   }
 
   Future<void> loginWithGoogle() async {
-    _isLoading = true;
-    _error = null;
-    notifyListeners();
+    setState(ViewState.busy);
 
     try {
       final result = await _authService.loginWithGoogle();
 
       if (result.success) {
+        Get.snackbar("Sucess", "Google login Sucessfully");
         Get.offAll(() => DrawerScreen());
       } else {
         _error = result.message ?? 'Google login failed';
@@ -77,7 +77,7 @@ class SignInViewModel extends BaseViewModel {
     } catch (e) {
       _error = e.toString();
     } finally {
-      _isLoading = false;
+      setState(ViewState.idle);
       notifyListeners();
     }
   }
